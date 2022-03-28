@@ -4,12 +4,9 @@ import java.util.Random;
 
 public class RandomGenerator {
 
-    public int getRandom (int minimum, int maximum) {
-
-        int min = minimum;
-        int max = maximum;
+    public int getRandom() {
         Random random = new Random();
-        int numberTrainees = random.nextInt(max - min) + min;
+        int numberTrainees = random.nextInt(101 - 50) + 50;
         return numberTrainees;
     }
 }
