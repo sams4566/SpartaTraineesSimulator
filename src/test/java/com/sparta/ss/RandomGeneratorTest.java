@@ -12,6 +12,6 @@ public class RandomGeneratorTest {
     void min10Max20ReturnsIntBetween10And20() {
         int value = getRandom();
         System.out.println(value);
-        Assertions.assertTrue(value<= 100 && value >= 50);
+        Assertions.assertTrue(value <= 100 && value >= 50);
     }
 }
