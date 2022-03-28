@@ -10,6 +10,8 @@ public class RandomGeneratorTest {
     @Test
     @DisplayName("Min 10 Max 20 returns int between 10 and 20")
     void min10Max20ReturnsIntBetween10And20() {
-        Assertions.assertTrue(getRandom()<= 100 && getRandom() >= 50);
+        int value = getRandom();
+        System.out.println(value);
+        Assertions.assertTrue(value<= 100 && value >= 50);
     }
 }
