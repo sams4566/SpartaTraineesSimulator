@@ -20,12 +20,6 @@ public class ConvertCSVFile {
             records.add((String[]) list.get(i));
         }
 
-        File directory=new File("src/main/resources/");
-        int fileCount=directory.list().length;
-        System.out.println("File Count:"+fileCount);
-
-        String csvName = "";
-
         try (CSVWriter writer = new CSVWriter(new FileWriter("src/main/resources/output.csv"))) {
             writer.writeAll(records);
         } catch (IOException e) {
