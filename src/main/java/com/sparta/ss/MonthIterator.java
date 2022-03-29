@@ -6,7 +6,7 @@ import com.sparta.ss.exception.InvalidCenterNumberException;
 import com.sparta.ss.exception.InvalidRunNumberException;
 import com.sparta.ss.exception.InvalidYearException;
 import com.sparta.ss.logs.SpartaSimulatorLogger;
-import com.sparta.ss.view.PrintOut;
+
 
 public class MonthIterator {
 
@@ -16,8 +16,9 @@ public class MonthIterator {
         return waitingList;
     }
 
+
     public static void monthIterator(String filename) {
-        PrintOut.printOut();
+ 
         try {
             SpartaSimulatorLogger.InfoMessage("Getting number of runs");
             for (int i = 0; i < CheckConfig.checkNumberOfRuns(filename); i++) {

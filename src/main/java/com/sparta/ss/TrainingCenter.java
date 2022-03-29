@@ -33,11 +33,9 @@ public class TrainingCenter {
         int placeholder = 0;
 
         for (TrainingCenter centre : TrainingCenterManager.trainingCenters) {
-            if (waitingList > 0) {
-                if(centre.isOpen) {
-                    waitingList = putIntoTrainingCentre(waitingList, centre);
-                }
-            } else if(randomTraineeNumber > 0){
+            if (waitingList > 0 && centre.isOpen) {
+                waitingList = putIntoTrainingCentre(waitingList, centre);
+            } else if(randomTraineeNumber > 0 && centre.isOpen){
                 randomTraineeNumber = putIntoTrainingCentre(randomTraineeNumber, centre);
             }
             else{
