@@ -19,14 +19,12 @@ public class ConvertCSVFile {
     }
 
     private static List<String[]> createCsvDataSimple() {
-        String[] header = {"open centres", "full centres", "trainees currently training", "trainees on the waiting list"};
-        String[] record1 = {"1", "0", "55", "0"};
-        String[] record2 = {"2", "1", "70", "20"};
+        String[] header = {"run times", "open centres", "full centres", "trainees currently training", "trainees on the waiting list"};
+        String[] record = {"1", "1", "0", "55", "0"};
 
         List<String[]> list = new ArrayList<>();
         list.add(header);
-        list.add(record1);
-        list.add(record2);
+        list.add(record);
 
         return list;
     }
