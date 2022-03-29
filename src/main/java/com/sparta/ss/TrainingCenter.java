@@ -39,17 +39,18 @@ public class TrainingCenter {
     }
 
     private static int putIntoTrainingCentre(int trainees, TrainingCenter centre) {
-        int placeholder;
-        if (trainees + centre.occupiedSeats < 100) {
-            placeholder = centre.occupiedSeats;
-            centre.occupiedSeats += trainees;
-            trainees -= centre.occupiedSeats - placeholder;
+        int amountToAllocate = RandomGenerator.getNumberOfTraineesForCenter();
+        if(amountToAllocate > trainees) {
+            amountToAllocate = trainees;
+        }
+        if (amountToAllocate + centre.occupiedSeats < 100) {
+            centre.occupiedSeats += amountToAllocate;
+            trainees -= amountToAllocate;
             return trainees;
-        } else if (trainees + centre.occupiedSeats == 100) {
-            placeholder = centre.occupiedSeats;
-            centre.occupiedSeats += trainees;
+        } else if (amountToAllocate + centre.occupiedSeats == 100) {
+            centre.occupiedSeats += amountToAllocate;
             centre.isOpen = false;
-            trainees -= centre.occupiedSeats - placeholder;
+            trainees -= amountToAllocate;
             return trainees;
         } else {
             trainees -= centre.vacancySeats;
@@ -57,6 +58,7 @@ public class TrainingCenter {
             centre.isOpen = false;
             return trainees;
         }
+
     }
 
     public boolean checkVacancy() {
