@@ -21,7 +21,6 @@ public class TrainingCenter {
     }
 
     public static int allocateTrainees(int waitingList, int randomTraineeNumber) {
-        int placeholder = 0;
         for (TrainingCenter centre : TrainingCenterManager.trainingCenters) {
             if (waitingList > 0) {
                 if(centre.isOpen) {
