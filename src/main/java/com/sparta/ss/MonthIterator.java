@@ -6,7 +6,10 @@ import com.sparta.ss.exception.InvalidCenterNumberException;
 import com.sparta.ss.exception.InvalidRunNumberException;
 import com.sparta.ss.exception.InvalidYearException;
 import com.sparta.ss.logs.SpartaSimulatorLogger;
-import com.sparta.ss.view.PrintOut;
+
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MonthIterator {
 
@@ -17,7 +20,7 @@ public class MonthIterator {
     }
 
     public static void monthIterator(String filename) {
-        PrintOut.printOut();
+        List<String[]> recordList = new ArrayList<>();
         try {
             SpartaSimulatorLogger.InfoMessage("Getting number of runs");
             for (int i = 0; i < CheckConfig.checkNumberOfRuns(filename); i++) {
@@ -32,10 +35,17 @@ public class MonthIterator {
                     }
                     traineeAllocator();
                 }
+                String records[] = {String.valueOf(i + 1), String.valueOf(TrainingCenterManager.getOpenCenters()), String.valueOf(TrainingCenterManager.getFullCenters()), String.valueOf(TrainingCenterManager.getNumberTraineesInTraining()), String.valueOf(waitingList)};
+                recordList.add(records);
             }
+
             SpartaSimulatorLogger.InfoMessage("Creating CSV file");
             ConvertCSVFile.createCVSFile(TrainingCenterManager.getOpenCenters(), TrainingCenterManager.getFullCenters(), TrainingCenterManager.getNumberTraineesInTraining(), waitingList);
             SpartaSimulatorLogger.InfoMessage("CSV file ready");
+
+
+            ConvertCSVFile.createCVSFile(recordList);
+
 
 
         } catch (InvalidYearException e) {

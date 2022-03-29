@@ -2,26 +2,57 @@ package com.sparta.ss;
 
 import com.opencsv.CSVWriter;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ConvertCSVFile {
-    public static void createCVSFile(int openCenters, int fullCenters, int traineesInTraining, int waitingList) {
 
-        String[] headers = new String[]{"Open centers", "Full centers", "Trainees currently training", "Trainees on the waiting list"};
-        String[] formattedData = {String.valueOf(openCenters), String.valueOf(fullCenters), String.valueOf(traineesInTraining), String.valueOf(waitingList)};
+    private static final String FILENAME = "src/main/resources/output";
+    private static final String CSV_EXT = ".csv";
+
+    public static void createCVSFile(List list) {
+
+        String[] headers = new String[]{"Number of runs", "Open centers", "Full centers", "Trainees currently training", "Trainees on the waiting list"};
 
         List<String[]> records = new ArrayList<>();
         records.add(headers);
-        records.add(formattedData);
 
-        try (CSVWriter writer = new CSVWriter(new FileWriter("src/main/resources/output.csv"))) {
+        for (int i = 0; i < list.size(); i ++) {
+            records.add((String[]) list.get(i));
+        }
+
+        File directory=new File("src/main/resources/");
+        int fileCount=directory.list().length;
+        System.out.println("File Count:"+fileCount);
+
+        String csvName = "";
+
+        createFile(records);
+
+    }
+
+    public static boolean checkFileExists(String filePath) {
+        File file = new File(filePath);
+        return file.exists();
+    }
+
+    public static void createFile(List<String[]> records) {
+        int numFile = 1;
+        String fileName = FILENAME + numFile + CSV_EXT;
+
+        while (checkFileExists(fileName)) {
+            numFile++;
+            fileName = FILENAME + numFile + CSV_EXT;
+        }
+        try (CSVWriter writer = new CSVWriter(new FileWriter(fileName))) {
             writer.writeAll(records);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 }
+
+
