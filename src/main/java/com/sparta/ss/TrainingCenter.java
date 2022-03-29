@@ -23,9 +23,15 @@ public class TrainingCenter {
         this.occupiedSeats = 100 - vacancySeats;
     }
 
+    public int getOccupiedSeats() {
+        return occupiedSeats;
+    }
+
     public static int allocateTrainees(int waitingList, int randomTraineeNumber) {
+
         SpartaSimulatorLogger.InfoMessage("Allocating trainees");
         int placeholder = 0;
+
         for (TrainingCenter centre : TrainingCenterManager.trainingCenters) {
             if (waitingList > 0) {
                 if(centre.isOpen) {

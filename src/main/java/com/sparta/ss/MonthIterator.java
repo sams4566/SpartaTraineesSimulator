@@ -29,10 +29,12 @@ public class MonthIterator {
                             TrainingCenter trainingCenter = new TrainingCenter();
                             TrainingCenterManager.getTrainingCenters().add(trainingCenter);
                         }
-                        traineeAllocator();
                     }
+                    traineeAllocator();
                 }
             }
+            ConvertCSVFile.createCVSFile(TrainingCenterManager.getOpenCenters(), TrainingCenterManager.getFullCenters(), TrainingCenterManager.getNumberTraineesInTraining(), waitingList);
+
 
         } catch (InvalidYearException e) {
             SpartaSimulatorLogger.warningMessage("Invalid year exception thrown");
@@ -51,7 +53,7 @@ public class MonthIterator {
             SpartaSimulatorLogger.InfoMessage("Updating the waiting list");
             int numberOfTrainees = RandomGenerator.getRandomTrainees();
 
-            if (TrainingCenterManager.getEmptyCenters() == 0) {
+            if (TrainingCenterManager.getOpenCenters() == 0) {
                 waitingList += numberOfTrainees;
             } else {
                 waitingList = TrainingCenter.allocateTrainees(waitingList, numberOfTrainees);
