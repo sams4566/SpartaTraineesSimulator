@@ -1,25 +1,27 @@
 package com.sparta.ss;
 
-import java.util.Arrays;
+import com.sparta.ss.config.ConfigFilename;
+import com.sparta.ss.config.PropertiesLoader;
+import com.sparta.ss.exception.InvalidCenterNumberException;
+import com.sparta.ss.exception.InvalidRunNumberException;
+import com.sparta.ss.exception.InvalidYearException;
 
 public class CheckConfig {
+    static  PropertiesLoader propertiesLoader = new PropertiesLoader();
 
-    public static void main(String[] args) {
-        String[] configValue = new String[3];
-        configValue[0] = PropertiesLoader.getProperties().getProperty("amountOfYears");
-        configValue[1] = PropertiesLoader.getProperties().getProperty("amountOfCentresGeneratedEveryOtherMonth");
-        configValue[2] = PropertiesLoader.getProperties().getProperty("amountOfTimesToRun");
+    public static int checkNumberOfYears() throws InvalidYearException {
+        int year = Integer.parseInt(propertiesLoader.getProperties(ConfigFilename.filename).getProperty("amountOfYears"));
+        return year;
+    }
 
-        try{
-            int[] input = new int[3];
-            for (int i = 0; i < input.length; i ++) {
-                input[i] = Integer.parseInt(configValue[i]);
-            }
+    public static int OfCentersGenerated() throws InvalidCenterNumberException {
+            int numberOfCenters = Integer.parseInt(propertiesLoader.getProperties(ConfigFilename.filename).getProperty("amountOfCentresGeneratedEveryOtherMonth"));
+            return numberOfCenters;
+    }
 
-            System.out.println(Arrays.toString(input));
-        }
-        catch (NumberFormatException ex){
-            System.out.println("The value of config is invalid. Please check config.properties file");
-        }
+
+    public static int checkNumberOfRuns() throws InvalidRunNumberException {
+        int numberOfRuns = Integer.parseInt(propertiesLoader.getProperties(ConfigFilename.filename).getProperty("amountOfTimesToRun"));
+        return numberOfRuns;
     }
 }
