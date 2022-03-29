@@ -2,6 +2,9 @@ package com.sparta.ss;
 
 import com.sparta.ss.config.ConfigFilename;
 import com.sparta.ss.config.PropertiesLoader;
+import com.sparta.ss.exception.InvalidCenterNumberException;
+import com.sparta.ss.exception.InvalidRunNumberException;
+import com.sparta.ss.exception.InvalidYearException;
 import com.sparta.ss.view.PrintOut;
 
 public class MonthIterator {
@@ -12,8 +15,10 @@ public class MonthIterator {
         return waitingList;
     }
 
-    public void monthIterator(){
+    public void monthIterator() {
         PrintOut.printOut();
+        try {
+
         for(int i = 0; i < getProperty("amountOfTimesToRun"); i++){
             for(int j = 1; j <= getProperty("amountOfYears")*12; j++){
                 if(j%2 != 1){
@@ -21,15 +26,22 @@ public class MonthIterator {
                         TrainingCenter trainingCenter = new TrainingCenter();
                         TrainingCenterManager.getTrainingCenters().add(trainingCenter);
                     }
+                    traineeAllocator();
                 }
-                traineeAllocator();
             }
+        }catch (InvalidYearException e){
+            System.out.println(e.invalidYearException());
+        } catch (InvalidRunNumberException e) {
+            System.out.println(e.invalidRunNumberException());
+        } catch (InvalidCenterNumberException e) {
+            System.out.println(e.invalidCenterNumberException());
         }
 
     }
 
     public static void traineeAllocator() {
-        int numberOfTrainees = RandomGenerator.getRandomTrainees();
+        int numberofTrainees = RandomGenerator.getRandomTrainees();
+
         if(TrainingCenterManager.getEmptyCenters()==0){
             waitingList += numberOfTrainees;
         }else{
