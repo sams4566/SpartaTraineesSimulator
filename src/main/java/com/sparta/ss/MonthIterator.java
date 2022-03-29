@@ -5,7 +5,6 @@ import com.sparta.ss.config.PropertiesLoader;
 import com.sparta.ss.exception.InvalidCenterNumberException;
 import com.sparta.ss.exception.InvalidRunNumberException;
 import com.sparta.ss.exception.InvalidYearException;
-import com.sparta.ss.view.PrintOut;
 
 public class MonthIterator {
 
@@ -16,7 +15,6 @@ public class MonthIterator {
     }
 
     public static void monthIterator() {
-        PrintOut.printOut();
         try {
 
             for (int i = 0; i < CheckConfig.checkNumberOfRuns(); i++) {

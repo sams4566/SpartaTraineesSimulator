@@ -26,11 +26,9 @@ public class TrainingCenter {
 
     public static int allocateTrainees(int waitingList, int randomTraineeNumber) {
         for (TrainingCenter centre : TrainingCenterManager.trainingCenters) {
-            if (waitingList > 0) {
-                if(centre.isOpen) {
-                    waitingList = putIntoTrainingCentre(waitingList, centre);
-                }
-            } else if(randomTraineeNumber > 0){
+            if (waitingList > 0 && centre.isOpen) {
+                waitingList = putIntoTrainingCentre(waitingList, centre);
+            } else if(randomTraineeNumber > 0 && centre.isOpen){
                 randomTraineeNumber = putIntoTrainingCentre(randomTraineeNumber, centre);
             }
             else{

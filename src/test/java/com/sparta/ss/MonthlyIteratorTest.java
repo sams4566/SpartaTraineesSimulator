@@ -31,4 +31,16 @@ public class MonthlyIteratorTest {
     void checkCentresAreFilled() {
         assertEquals(true,TrainingCenterManager.getFullCenters() >= 1);
     }
+
+    @Test
+    @DisplayName("check waiting list is not a negative number")
+    void checkWaitingListIsNotANegativeNumber() {
+        int i = 0;
+        while(i<250){
+            MonthIterator.monthIterator();
+            Assertions.assertEquals(true,MonthIterator.getWaitingList()>=0);
+            i++;
+        }
+
+    }
 }
