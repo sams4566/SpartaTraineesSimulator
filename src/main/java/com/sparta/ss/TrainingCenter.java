@@ -20,32 +20,44 @@ public class TrainingCenter {
         this.occupiedSeats = 100 - vacancySeats;
     }
 
-    private void allocateTrainees(int numberTrainees){
-        //just need to randomize the numberTrainees we assign to each center.
-        // Probably something in else break. Maybe use list of randomly generated ints instead of numberTrainees?
-        for (TrainingCenter centre : openTrainingCenter) {
-            if (numberTrainees > 0){
-                if (numberTrainees + centre.occupiedSeats < 100) {
-                    centre.occupiedSeats += numberTrainees;
-                    numberTrainees = 0;
-                } else if (numberTrainees + centre.occupiedSeats == 100) {
-                    centre.occupiedSeats += numberTrainees;
-                    numberTrainees = 0;
-                    centre.isOpen = false;
-                } else {
-                    numberTrainees = numberTrainees - centre.vacancySeats;
-                    centre.occupiedSeats = 100;
-                    centre.isOpen = false;
+    public static int allocateTrainees(int waitingList, int randomTraineeNumber) {
+        int placeholder = 0;
+        for (TrainingCenter centre : TrainingCenterManager.trainingCenters) {
+            if (waitingList > 0) {
+                if(centre.isOpen) {
+                    waitingList = putIntoTrainingCentre(waitingList, centre);
                 }
-            } else {
-                break;
+            } else if(randomTraineeNumber > 0){
+                randomTraineeNumber = putIntoTrainingCentre(randomTraineeNumber, centre);
+            }
+            else{
+                return waitingList;
             }
         }
-      
-    private void allocatetrainees() {
-        // require random generator
+        waitingList += randomTraineeNumber;
+        return waitingList;
     }
 
+    private static int putIntoTrainingCentre(int trainees, TrainingCenter centre) {
+        int placeholder;
+        if (trainees + centre.occupiedSeats < 100) {
+            placeholder = centre.occupiedSeats;
+            centre.occupiedSeats += trainees;
+            trainees -= centre.occupiedSeats - placeholder;
+            return trainees;
+        } else if (trainees + centre.occupiedSeats == 100) {
+            placeholder = centre.occupiedSeats;
+            centre.occupiedSeats += trainees;
+            centre.isOpen = false;
+            trainees -= centre.occupiedSeats - placeholder;
+            return trainees;
+        } else {
+            trainees -= centre.vacancySeats;
+            centre.occupiedSeats = 100;
+            centre.isOpen = false;
+            return trainees;
+        }
+    }
 
     public boolean checkVacancy() {
         return checkIfFull();
@@ -58,4 +70,5 @@ public class TrainingCenter {
         return isOpen;
     }
 }
+
 
