@@ -1,5 +1,6 @@
 package com.sparta.ss;
 
+import com.sparta.ss.config.ConfigFilename;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -9,10 +10,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MonthlyIteratorTest {
 
-//    @BeforeAll
-//    static void createListCenters() {
-//        MonthIterator.monthIterator();
-//    }
+    @BeforeAll
+    static void createListCenters() {
+        MonthIterator.monthIterator(ConfigFilename.filename);
+    }
 
     @Test
     @DisplayName("Check waiting list is updated")
