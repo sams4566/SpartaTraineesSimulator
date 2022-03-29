@@ -1,5 +1,8 @@
 package com.sparta.ss;
 
+import com.sparta.ss.logs.SpartaSimulatorLogger;
+
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +28,10 @@ public class TrainingCenter {
     }
 
     public static int allocateTrainees(int waitingList, int randomTraineeNumber) {
+
+        SpartaSimulatorLogger.InfoMessage("Allocating trainees");
+        int placeholder = 0;
+
         for (TrainingCenter centre : TrainingCenterManager.trainingCenters) {
             if (waitingList > 0 && centre.isOpen) {
                 waitingList = putIntoTrainingCentre(waitingList, centre);
