@@ -4,7 +4,11 @@ import com.sparta.ss.view.PrintOut;
 
 public class MonthIterator {
 
-    public static int waitingList = 0;
+    private static int waitingList = 0;
+
+    public static int getWaitingList() {
+        return waitingList;
+    }
 
     public void monthIterator(){
         PrintOut.printOut();
@@ -21,9 +25,9 @@ public class MonthIterator {
 
     }
 
-    public void traineeAllocator() {
+    public static void traineeAllocator() {
         int numberofTrainees = RandomGenerator.getRandom();
-        if(TrainingCenter.openTrainingCenter.size()==0){
+        if(TrainingCenterManager.getEmptyCenters()==0){
             waitingList+= numberofTrainees;
         }
         //else

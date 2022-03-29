@@ -11,10 +11,13 @@ public class TrainingCenterManagerTester {
 
     @BeforeAll
     static void createListCenters() {
-        TrainingCenter trainingCenter1 = new TrainingCenter(100,100);
-        TrainingCenter trainingCenter2 = new TrainingCenter(100,100);
-        TrainingCenter trainingCenter3 = new TrainingCenter(100,100);
-        TrainingCenter trainingCenter4 = new TrainingCenter(100,0);
+        TrainingCenter trainingCenter1 = new TrainingCenter();
+        TrainingCenter trainingCenter2 = new TrainingCenter();
+        TrainingCenter trainingCenter3 = new TrainingCenter();
+        TrainingCenter trainingCenter4 = new TrainingCenter();
+        trainingCenter1.setVacancySeats(0);
+        trainingCenter2.setVacancySeats(0);
+        trainingCenter3.setVacancySeats(0);
         trainingCenterManager.getTrainingCenters().add(trainingCenter1);
         trainingCenterManager.getTrainingCenters().add(trainingCenter2);
         trainingCenterManager.getTrainingCenters().add(trainingCenter3);

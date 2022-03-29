@@ -9,8 +9,6 @@ public class TrainingCenter {
     private int maxLimit = 100;
     private boolean isOpen = true;
 
-        public static List<TrainingCenter> openTrainingCenter = new ArrayList<>();
-        public static List<TrainingCenter> fullTrainingCenter = new ArrayList<>();
 
     public TrainingCenter() {
         this.vacancySeats = 100;

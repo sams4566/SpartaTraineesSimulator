@@ -8,6 +8,8 @@ public class MonthlyIteratorTest {
     @Test
     @DisplayName("Check waiting list is updated")
     void checkWaitingListIsUpdated() {
-        Assertions.assertEquals(1,1);
+        MonthIterator.traineeAllocator();
+        Assertions.assertEquals(true,MonthIterator.getWaitingList()>=50 && MonthIterator.getWaitingList()<=100);
     }
+
 }
