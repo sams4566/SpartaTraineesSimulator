@@ -8,26 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConvertCSVFile {
-    public static void convert() {
-        List<String[]> csvData = createCsvDataSimple();
+    public static void createCVSFile(int openCenters, int fullCenters, int traineesInTraining, int waitingList) {
+
+        String[] headers = new String[]{"Open centers", "Full centers", "Trainees currently training", "Trainees on the waiting list"};
+        String[] formattedData = {String.valueOf(openCenters), String.valueOf(fullCenters), String.valueOf(traineesInTraining), String.valueOf(waitingList)};
+
+        List<String[]> records = new ArrayList<>();
+        records.add(headers);
+        records.add(formattedData);
 
         try (CSVWriter writer = new CSVWriter(new FileWriter("src/main/resources/output.csv"))) {
-            writer.writeAll(csvData);
+            writer.writeAll(records);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static List<String[]> createCsvDataSimple() {
-        String[] header = {"open centres", "full centres", "trainees currently training", "trainees on the waiting list"};
-        String[] record1 = {"1", "0", "55", "0"};
-        String[] record2 = {"2", "1", "70", "20"};
-
-        List<String[]> list = new ArrayList<>();
-        list.add(header);
-        list.add(record1);
-        list.add(record2);
-
-        return list;
-    }
 }
