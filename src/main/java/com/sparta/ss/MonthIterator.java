@@ -1,5 +1,7 @@
 package com.sparta.ss;
 
+import com.sparta.ss.config.ConfigFilename;
+import com.sparta.ss.config.PropertiesLoader;
 import com.sparta.ss.view.PrintOut;
 
 public class MonthIterator {
@@ -34,7 +36,7 @@ public class MonthIterator {
     }
 
     private int getProperty(String property){
-        return Integer.parseInt(PropertiesLoader.getProperties().getProperty(property));
+        return Integer.parseInt(PropertiesLoader.getProperties(ConfigFilename.filename).getProperty(property));
     }
 
 }
