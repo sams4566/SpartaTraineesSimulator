@@ -2,7 +2,8 @@ package com.sparta.ss.exception;
 
 public class InvalidYearException extends Exception{
 
-    public String invalidYearException(){
+    @Override
+    public String getMessage() {
         return "Number of years is wrong ! Please try again";
     }
 }
