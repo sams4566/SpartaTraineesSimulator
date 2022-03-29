@@ -25,13 +25,13 @@ public class MonthIterator {
 
             for (int i = 0; i < CheckConfig.checkNumberOfRuns(); i++) {
                 for (int j = 1; j <= CheckConfig.checkNumberOfYears() * 12; j++) {
-                    if (j % 2 != 1) {
+                    if (j % 2 == 0) {
                         for (int t = 0; t < CheckConfig.OfCentersGenerated(); t++) {
                             TrainingCenter trainingCenter = new TrainingCenter();
                             TrainingCenterManager.getTrainingCenters().add(trainingCenter);
                         }
-                        traineeAllocator();
                     }
+                    traineeAllocator();
                 }
                 String records[] = {String.valueOf(i + 1), String.valueOf(TrainingCenterManager.getOpenCenters()), String.valueOf(TrainingCenterManager.getFullCenters()), String.valueOf(TrainingCenterManager.getNumberTraineesInTraining()), String.valueOf(waitingList)};
                 recordList.add(records);
