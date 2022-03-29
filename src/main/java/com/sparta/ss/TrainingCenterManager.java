@@ -7,7 +7,7 @@ public class TrainingCenterManager {
 
     static List<TrainingCenter> trainingCenters = new ArrayList<>();
 
-    public List<TrainingCenter> getTrainingCenters() {
+    public static List<TrainingCenter> getTrainingCenters() {
         return trainingCenters;
     }
 

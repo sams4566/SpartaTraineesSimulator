@@ -19,12 +19,12 @@ public class MonthIterator {
         PrintOut.printOut();
         try {
 
-            for (int i = 0; i < CheckConfig.checkNumberOfRuns(); i++) {
-                for (int j = 1; j <= CheckConfig.checkNumberOfYears() * 12; j++) {
-                    if (j % 2 != 1) {
-                        for (int t = 0; t < CheckConfig.OfCentersGenerated(); t++) {
-                            TrainingCenter trainingCenter = new TrainingCenter();
-                        }
+        for(int i = 0; i < getProperty("amountOfTimesToRun"); i++){
+            for(int j = 1; j <= getProperty("amountOfYears")*12; j++){
+                if(j%2 != 1){
+                    for(int t = 0; t < getProperty("amountOfCentresGeneratedEveryOtherMonth");t++){
+                        TrainingCenter trainingCenter = new TrainingCenter();
+                        TrainingCenterManager.getTrainingCenters().add(trainingCenter);
                     }
                     traineeAllocator();
                 }
@@ -41,10 +41,12 @@ public class MonthIterator {
 
     public static void traineeAllocator() {
         int numberofTrainees = RandomGenerator.getRandomTrainees();
+
         if(TrainingCenterManager.getEmptyCenters()==0){
-            waitingList+= numberofTrainees;
+            waitingList += numberOfTrainees;
+        }else{
+            waitingList = TrainingCenter.allocateTrainees(waitingList, numberOfTrainees);
         }
-        //else
     }
 
     private int getProperty(String property){
