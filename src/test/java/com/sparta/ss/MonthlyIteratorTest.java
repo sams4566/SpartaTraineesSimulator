@@ -9,10 +9,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MonthlyIteratorTest {
 
-    @BeforeAll
-    static void createListCenters() {
-        MonthIterator.monthIterator();
-    }
+//    @BeforeAll
+//    static void createListCenters() {
+//        MonthIterator.monthIterator();
+//    }
 
     @Test
     @DisplayName("Check waiting list is updated")
@@ -32,15 +32,15 @@ public class MonthlyIteratorTest {
         assertEquals(true,TrainingCenterManager.getFullCenters() >= 1);
     }
 
-    @Test
-    @DisplayName("check waiting list is not a negative number")
-    void checkWaitingListIsNotANegativeNumber() {
-        int i = 0;
-        while(i<250){
-            MonthIterator.monthIterator();
-            Assertions.assertEquals(true,MonthIterator.getWaitingList()>=0);
-            i++;
-        }
-
-    }
+//    @Test
+//    @DisplayName("check waiting list is not a negative number")
+//    void checkWaitingListIsNotANegativeNumber() {
+//        int i = 0;
+//        while(i<250){
+//            MonthIterator.monthIterator();
+//            Assertions.assertEquals(true,MonthIterator.getWaitingList()>=0);
+//            i++;
+//        }
+//
+//    }
 }

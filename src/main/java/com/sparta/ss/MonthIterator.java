@@ -20,7 +20,7 @@ public class MonthIterator {
     }
 
     public static void monthIterator(String filename) {
- 
+        List<String[]> recordList = new ArrayList<>();
         try {
             SpartaSimulatorLogger.InfoMessage("Getting number of runs");
             for (int i = 0; i < CheckConfig.checkNumberOfRuns(filename); i++) {
