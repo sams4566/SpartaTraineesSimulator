@@ -19,6 +19,7 @@ public class MonthIterator {
                 if(j%2 != 1){
                     for(int t = 0; t < getProperty("amountOfCentresGeneratedEveryOtherMonth");t++){
                         TrainingCenter trainingCenter = new TrainingCenter();
+                        TrainingCenterManager.getTrainingCenters().add(trainingCenter);
                     }
                 }
                 traineeAllocator();
@@ -28,11 +29,12 @@ public class MonthIterator {
     }
 
     public static void traineeAllocator() {
-        int numberofTrainees = RandomGenerator.getRandom();
+        int numberOfTrainees = RandomGenerator.getRandomTrainees();
         if(TrainingCenterManager.getEmptyCenters()==0){
-            waitingList+= numberofTrainees;
+            waitingList += numberOfTrainees;
+        }else{
+            waitingList = TrainingCenter.allocateTrainees(waitingList, numberOfTrainees);
         }
-        //else
     }
 
     private int getProperty(String property){
