@@ -15,42 +15,43 @@ public class MonthIterator {
         return waitingList;
     }
 
-    public void monthIterator() {
+    public static void monthIterator() {
         PrintOut.printOut();
         try {
 
-        for(int i = 0; i < getProperty("amountOfTimesToRun"); i++){
-            for(int j = 1; j <= getProperty("amountOfYears")*12; j++){
-                if(j%2 != 1){
-                    for(int t = 0; t < getProperty("amountOfCentresGeneratedEveryOtherMonth");t++){
-                        TrainingCenter trainingCenter = new TrainingCenter();
-                        TrainingCenterManager.getTrainingCenters().add(trainingCenter);
+            for (int i = 0; i < CheckConfig.checkNumberOfRuns(); i++) {
+                for (int j = 1; j <= CheckConfig.checkNumberOfYears() * 12; j++) {
+                    if (j % 2 != 1) {
+                        for (int t = 0; t < CheckConfig.OfCentersGenerated(); t++) {
+                            TrainingCenter trainingCenter = new TrainingCenter();
+                            TrainingCenterManager.getTrainingCenters().add(trainingCenter);
+                        }
+                        traineeAllocator();
                     }
-                    traineeAllocator();
                 }
             }
-        }catch (InvalidYearException e){
+        } catch (InvalidYearException e) {
             System.out.println(e.invalidYearException());
         } catch (InvalidRunNumberException e) {
             System.out.println(e.invalidRunNumberException());
         } catch (InvalidCenterNumberException e) {
             System.out.println(e.invalidCenterNumberException());
         }
-
     }
 
-    public static void traineeAllocator() {
-        int numberofTrainees = RandomGenerator.getRandomTrainees();
 
-        if(TrainingCenterManager.getEmptyCenters()==0){
-            waitingList += numberOfTrainees;
-        }else{
-            waitingList = TrainingCenter.allocateTrainees(waitingList, numberOfTrainees);
+        public static void traineeAllocator () {
+            int numberOfTrainees = RandomGenerator.getRandomTrainees();
+
+            if (TrainingCenterManager.getEmptyCenters() == 0) {
+                waitingList += numberOfTrainees;
+            } else {
+                waitingList = TrainingCenter.allocateTrainees(waitingList, numberOfTrainees);
+            }
         }
-    }
 
-    private int getProperty(String property){
-        return Integer.parseInt(PropertiesLoader.getProperties(ConfigFilename.filename).getProperty(property));
-    }
+        private int getProperty (String property){
+            return Integer.parseInt(PropertiesLoader.getProperties(ConfigFilename.filename).getProperty(property));
+        }
 
 }
