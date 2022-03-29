@@ -21,13 +21,13 @@ public class MonthIterator {
 
             for (int i = 0; i < CheckConfig.checkNumberOfRuns(); i++) {
                 for (int j = 1; j <= CheckConfig.checkNumberOfYears() * 12; j++) {
-                    if (j % 2 != 1) {
+                    if (j % 2 == 0) {
                         for (int t = 0; t < CheckConfig.OfCentersGenerated(); t++) {
                             TrainingCenter trainingCenter = new TrainingCenter();
                             TrainingCenterManager.getTrainingCenters().add(trainingCenter);
                         }
-                        traineeAllocator();
                     }
+                    traineeAllocator();
                 }
             }
             ConvertCSVFile.createCVSFile(TrainingCenterManager.getOpenCenters(), TrainingCenterManager.getFullCenters(), TrainingCenterManager.getNumberTraineesInTraining(), waitingList);
