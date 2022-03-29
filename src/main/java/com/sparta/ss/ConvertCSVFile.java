@@ -2,8 +2,7 @@ package com.sparta.ss;
 
 import com.opencsv.CSVWriter;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +16,29 @@ public class ConvertCSVFile {
         records.add(headers);
         records.add(formattedData);
 
-        try (CSVWriter writer = new CSVWriter(new FileWriter("src/main/resources/output.csv"))) {
+        createFile(records);
+
+    }
+
+    public static boolean checkFileExists(String filePath) {
+        File file = new File(filePath);
+        return file.exists();
+    }
+
+    public static void createFile(List<String[]> records) {
+        int numFile = 1;
+        String fileName = "src/main/resources/output" + numFile + ".csv";
+
+        while (checkFileExists(fileName)) {
+            numFile++;
+            fileName = "src/main/resources/output" + numFile + ".csv";
+        }
+        try (CSVWriter writer = new CSVWriter(new FileWriter(fileName))) {
             writer.writeAll(records);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 }
+
+
