@@ -4,15 +4,29 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static com.sparta.ss.RandomGenerator.getNumberOfTraineesForCenter;
 import static com.sparta.ss.RandomGenerator.getRandomTrainees;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class RandomGeneratorTest {
     @Test
-    @DisplayName("Min 10 Max 20 returns int between 10 and 20")
-    void min10Max20ReturnsIntBetween10And20() {
-        int value = getRandomTrainees();
-        System.out.println(value);
-        Assertions.assertTrue(value <= 100 && value >= 50);
+    @DisplayName("getRandomTrainees returns value between 50 and 100")
+    void getRandomTraineesReturnsValueBetween50And100() {
+        for (int i = 0; i < 19 ; i++){
+            int value = getRandomTrainees();
+            System.out.println(value);
+            Assertions.assertTrue(value <= 100 && value >= 50);
+        }
+    }
+
+    @Test
+    @DisplayName("getNumberOfTraineesForCenter returns value between 0 and 50")
+    void getNumberOfTraineesForCenterReturnsValueBetween50And100() {
+        for (int i = 0; i < 19; i++) {
+            int value = getNumberOfTraineesForCenter();
+            System.out.println(value);
+            Assertions.assertTrue(value <= 50 && value >= 0);
+        }
     }
 }
