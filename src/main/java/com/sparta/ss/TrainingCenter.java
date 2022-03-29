@@ -20,6 +20,10 @@ public class TrainingCenter {
         this.occupiedSeats = 100 - vacancySeats;
     }
 
+    public int getOccupiedSeats() {
+        return occupiedSeats;
+    }
+
     public static int allocateTrainees(int waitingList, int randomTraineeNumber) {
         int placeholder = 0;
         for (TrainingCenter centre : TrainingCenterManager.trainingCenters) {

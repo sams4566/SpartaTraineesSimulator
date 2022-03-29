@@ -30,6 +30,8 @@ public class MonthIterator {
                     }
                 }
             }
+            ConvertCSVFile.createCVSFile(TrainingCenterManager.getOpenCenters(), TrainingCenterManager.getFullCenters(), TrainingCenterManager.getNumberTraineesInTraining(), waitingList);
+
         } catch (InvalidYearException e) {
             System.out.println(e.invalidYearException());
         } catch (InvalidRunNumberException e) {
@@ -43,7 +45,7 @@ public class MonthIterator {
         public static void traineeAllocator () {
             int numberOfTrainees = RandomGenerator.getRandomTrainees();
 
-            if (TrainingCenterManager.getEmptyCenters() == 0) {
+            if (TrainingCenterManager.getOpenCenters() == 0) {
                 waitingList += numberOfTrainees;
             } else {
                 waitingList = TrainingCenter.allocateTrainees(waitingList, numberOfTrainees);
