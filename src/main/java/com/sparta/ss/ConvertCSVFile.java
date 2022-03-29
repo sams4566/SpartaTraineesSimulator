@@ -8,24 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConvertCSVFile {
-    public static void convert() {
-        List<String[]> csvData = createCsvDataSimple();
+    public static void createCVSFile(List list) {
+
+        String[] headers = new String[]{"Open centers", "Full centers", "Trainees currently training", "Trainees on the waiting list"};
+
+        List<String[]> records = new ArrayList<>();
+        records.add(headers);
+
+        for (int i = 0; i < list.size(); i ++) {
+            records.add((String[]) list.get(i));
+        }
 
         try (CSVWriter writer = new CSVWriter(new FileWriter("src/main/resources/output.csv"))) {
-            writer.writeAll(csvData);
+            writer.writeAll(records);
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private static List<String[]> createCsvDataSimple() {
-        String[] header = {"run times", "open centres", "full centres", "trainees currently training", "trainees on the waiting list"};
-        String[] record = {"1", "1", "0", "55", "0"};
-
-        List<String[]> list = new ArrayList<>();
-        list.add(header);
-        list.add(record);
-
-        return list;
     }
 }

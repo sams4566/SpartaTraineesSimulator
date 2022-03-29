@@ -11,7 +11,7 @@ public class TrainingCenterManager {
         return trainingCenters;
     }
 
-    public static int getOpenCenters() {
+    public static int getTotCenters() {
         return trainingCenters.size();
     }
 
@@ -19,8 +19,16 @@ public class TrainingCenterManager {
         return (int) trainingCenters.stream().filter(trainingCenter -> !trainingCenter.checkVacancy()).count();
     }
 
-    public static int getEmptyCenters(){
+    public static int getOpenCenters(){
         return (int) trainingCenters.stream().filter(trainingCenter -> trainingCenter.checkVacancy()).count();
+    }
+
+    public static int getNumberTraineesInTraining(){
+        int countTrainees = 0;
+        for(TrainingCenter trainingCenter : trainingCenters){
+            countTrainees += trainingCenter.getOccupiedSeats();
+        }
+        return countTrainees;
     }
 
     public static List<TrainingCenter> getEmptyCentersList(){

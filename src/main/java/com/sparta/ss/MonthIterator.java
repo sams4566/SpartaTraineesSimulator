@@ -7,6 +7,9 @@ import com.sparta.ss.exception.InvalidRunNumberException;
 import com.sparta.ss.exception.InvalidYearException;
 import com.sparta.ss.view.PrintOut;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MonthIterator {
 
     private static int waitingList = 0;
@@ -16,6 +19,7 @@ public class MonthIterator {
     }
 
     public static void monthIterator() {
+        List<String[]> recordList = new ArrayList<>();
         PrintOut.printOut();
         try {
 
@@ -29,7 +33,12 @@ public class MonthIterator {
                         traineeAllocator();
                     }
                 }
+                String records[] = {String.valueOf(i + 1), String.valueOf(TrainingCenterManager.getOpenCenters()), String.valueOf(TrainingCenterManager.getFullCenters()), String.valueOf(TrainingCenterManager.getNumberTraineesInTraining()), String.valueOf(waitingList)};
+                recordList.add(records);
             }
+
+            ConvertCSVFile.createCVSFile(recordList);
+
         } catch (InvalidYearException e) {
             System.out.println(e.invalidYearException());
         } catch (InvalidRunNumberException e) {
@@ -43,7 +52,7 @@ public class MonthIterator {
         public static void traineeAllocator () {
             int numberOfTrainees = RandomGenerator.getRandomTrainees();
 
-            if (TrainingCenterManager.getEmptyCenters() == 0) {
+            if (TrainingCenterManager.getOpenCenters() == 0) {
                 waitingList += numberOfTrainees;
             } else {
                 waitingList = TrainingCenter.allocateTrainees(waitingList, numberOfTrainees);
