@@ -1,5 +1,6 @@
 package com.sparta.ss;
 
+import com.sparta.ss.config.ConfigFilename;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -11,7 +12,7 @@ public class MonthlyIteratorTest {
 
     @BeforeAll
     static void createListCenters() {
-        MonthIterator.monthIterator();
+        MonthIterator.monthIterator(ConfigFilename.filename);
     }
 
     @Test

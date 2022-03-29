@@ -33,7 +33,9 @@ public class MonthIterator {
                     traineeAllocator();
                 }
             }
+            SpartaSimulatorLogger.InfoMessage("Creating CSV file");
             ConvertCSVFile.createCVSFile(TrainingCenterManager.getOpenCenters(), TrainingCenterManager.getFullCenters(), TrainingCenterManager.getNumberTraineesInTraining(), waitingList);
+            SpartaSimulatorLogger.InfoMessage("CSV file ready");
 
 
         } catch (InvalidYearException e) {
