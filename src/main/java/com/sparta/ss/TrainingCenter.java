@@ -28,10 +28,8 @@ public class TrainingCenter {
     }
 
     public static int allocateTrainees(int waitingList, int randomTraineeNumber) {
-
         SpartaSimulatorLogger.InfoMessage("Allocating trainees");
         int placeholder = 0;
-
         for (TrainingCenter centre : TrainingCenterManager.trainingCenters) {
             if (waitingList > 0 && centre.isOpen) {
                 waitingList = putIntoTrainingCentre(waitingList, centre);

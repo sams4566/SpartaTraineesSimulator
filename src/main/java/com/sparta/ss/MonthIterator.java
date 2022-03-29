@@ -8,6 +8,9 @@ import com.sparta.ss.exception.InvalidYearException;
 import com.sparta.ss.logs.SpartaSimulatorLogger;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MonthIterator {
 
     private static int waitingList = 0;
@@ -15,7 +18,6 @@ public class MonthIterator {
     public static int getWaitingList() {
         return waitingList;
     }
-
 
     public static void monthIterator(String filename) {
  
@@ -33,8 +35,11 @@ public class MonthIterator {
                     }
                     traineeAllocator();
                 }
+                String records[] = {String.valueOf(i + 1), String.valueOf(TrainingCenterManager.getOpenCenters()), String.valueOf(TrainingCenterManager.getFullCenters()), String.valueOf(TrainingCenterManager.getNumberTraineesInTraining()), String.valueOf(waitingList)};
+                recordList.add(records);
             }
-            ConvertCSVFile.createCVSFile(TrainingCenterManager.getOpenCenters(), TrainingCenterManager.getFullCenters(), TrainingCenterManager.getNumberTraineesInTraining(), waitingList);
+
+            ConvertCSVFile.createCVSFile(recordList);
 
 
         } catch (InvalidYearException e) {
