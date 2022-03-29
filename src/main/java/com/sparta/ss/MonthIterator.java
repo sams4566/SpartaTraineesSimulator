@@ -5,6 +5,7 @@ import com.sparta.ss.config.PropertiesLoader;
 import com.sparta.ss.exception.InvalidCenterNumberException;
 import com.sparta.ss.exception.InvalidRunNumberException;
 import com.sparta.ss.exception.InvalidYearException;
+import com.sparta.ss.logs.SpartaSimulatorLogger;
 import com.sparta.ss.view.PrintOut;
 
 public class MonthIterator {
@@ -15,14 +16,16 @@ public class MonthIterator {
         return waitingList;
     }
 
-    public static void monthIterator() {
+    public static void monthIterator(String filename) {
         PrintOut.printOut();
         try {
-
-            for (int i = 0; i < CheckConfig.checkNumberOfRuns(); i++) {
-                for (int j = 1; j <= CheckConfig.checkNumberOfYears() * 12; j++) {
+            SpartaSimulatorLogger.InfoMessage("Getting number of runs");
+            for (int i = 0; i < CheckConfig.checkNumberOfRuns(filename); i++) {
+                SpartaSimulatorLogger.InfoMessage("Getting number of years");
+                for (int j = 1; j <= CheckConfig.checkNumberOfYears(filename) * 12; j++) {
                     if (j % 2 != 1) {
-                        for (int t = 0; t < CheckConfig.OfCentersGenerated(); t++) {
+                        SpartaSimulatorLogger.InfoMessage("Generating training center");
+                        for (int t = 0; t < CheckConfig.checkNumberOfCentersGenerated(filename); t++) {
                             TrainingCenter trainingCenter = new TrainingCenter();
                             TrainingCenterManager.getTrainingCenters().add(trainingCenter);
                         }
@@ -30,17 +33,22 @@ public class MonthIterator {
                     }
                 }
             }
+
         } catch (InvalidYearException e) {
+            SpartaSimulatorLogger.warningMessage("Invalid year exception thrown");
             System.out.println(e.invalidYearException());
         } catch (InvalidRunNumberException e) {
+            SpartaSimulatorLogger.warningMessage("Invalid run number exception thrown");
             System.out.println(e.invalidRunNumberException());
         } catch (InvalidCenterNumberException e) {
-            System.out.println(e.invalidCenterNumberException());
+            SpartaSimulatorLogger.warningMessage("Invalid center number exception thrown");
+            e.getMessage();
         }
     }
 
 
         public static void traineeAllocator () {
+            SpartaSimulatorLogger.InfoMessage("Updating the waiting list");
             int numberOfTrainees = RandomGenerator.getRandomTrainees();
 
             if (TrainingCenterManager.getEmptyCenters() == 0) {
