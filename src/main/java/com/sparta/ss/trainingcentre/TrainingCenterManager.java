@@ -9,6 +9,8 @@ public class TrainingCenterManager {
 
     public static List<TrainingCenter> trainingCenters = new ArrayList<>();
 
+    public static List<TrainingHub> trainingHubs = new ArrayList<>();
+
 
     public static List<TechCentre> techCenters = new ArrayList<>();
 
@@ -25,6 +27,10 @@ public class TrainingCenterManager {
 
     public static int getTotCenters() {
         return trainingCenters.size();
+    }
+
+    public static List<TrainingHub> getTrainingHub() {
+        return trainingHubs;
     }
 
     public static int getFullCenters(){
