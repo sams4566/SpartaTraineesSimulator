@@ -4,7 +4,11 @@ import java.util.ArrayList;
 
 public class TraineeManager {
     static ArrayList<Trainee> trainees = new ArrayList<>();
-    static ArrayList<Trainee> waitingList = new ArrayList<>();
+    public static ArrayList<Trainee> waitingList = new ArrayList<>();
+
+    public static void removeAllTraineesFromWaitingList(){
+        waitingList.removeAll(waitingList);
+    }
 
     public static ArrayList<Trainee> getTrainees() {
         return trainees;
