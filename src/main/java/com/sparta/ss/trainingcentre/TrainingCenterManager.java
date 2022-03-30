@@ -9,7 +9,9 @@ public class TrainingCenterManager {
 
     public static List<TrainingCenter> trainingCenters = new ArrayList<>();
 
+
     public static List<TechCentre> techCenters = new ArrayList<>();
+
 
     public static void removeAllTrainingCenter(){
          trainingCenters.removeAll(trainingCenters);
