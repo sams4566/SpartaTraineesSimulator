@@ -8,13 +8,23 @@ public class CurrentlyTrainingTrainees {
         this.trainees = trainees;
     }
 
-
     public int getTrainingTrainees() {
         return trainees;
     }
 
     public void addTrainingTrainees(int trainees) {
         setTrainingTrainees(getTrainingTrainees() + trainees);
+    }
+
+    public void removeTrainingTrainees(int trainees) {
+        if (getTrainingTrainees() > 0) {
+            if (trainees > getTrainingTrainees()) {
+                setTrainingTrainees(0);
+            }
+            else {
+                setTrainingTrainees(getTrainingTrainees() - trainees);
+            }
+        }
     }
 
 }
