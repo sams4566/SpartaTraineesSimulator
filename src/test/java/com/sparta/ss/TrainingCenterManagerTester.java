@@ -17,9 +17,11 @@ public class TrainingCenterManagerTester {
         TrainingCenter trainingCenter2 = new TrainingCenter();
         TrainingCenter trainingCenter3 = new TrainingCenter();
         TrainingCenter trainingCenter4 = new TrainingCenter();
-        trainingCenter2.setVacancySeats(0);
-        trainingCenter3.setVacancySeats(30);
-        trainingCenter4.setVacancySeats(50);
+
+        trainingCenter2.setOccupiedSeats(100);
+        trainingCenter2.setOccupiedSeats(70);
+        trainingCenter2.setOccupiedSeats(50);
+
         trainingCenterManager.getTrainingCenters().add(trainingCenter1);
         trainingCenterManager.getTrainingCenters().add(trainingCenter2);
         trainingCenterManager.getTrainingCenters().add(trainingCenter3);

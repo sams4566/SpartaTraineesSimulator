@@ -18,7 +18,7 @@ public class RandomGenerator {
 
     public static String getRandomCourse(){
         Random random = new Random();
-        int courseSelector = random.nextInt(6);
+        int courseSelector = random.nextInt(5);
         String[] courses = {"Java", "C#","Data","DevOps","Business"};
         return courses[courseSelector];
     }
