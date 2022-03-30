@@ -7,7 +7,7 @@ public class App
 {
     public static void main( String[] args )
     {   SpartaSimulatorLogger.createHandler();
-        SpartaSimulatorLogger.InfoMessage("Starting from main method");
+        SpartaSimulatorLogger.InfoMessage("Starting the simulator");
         MonthIterator.monthIterator(ConfigFilename.filename);
     }
 }
