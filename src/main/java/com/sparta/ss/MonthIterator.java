@@ -50,13 +50,13 @@ public class MonthIterator {
 
         } catch (InvalidYearException e) {
             SpartaSimulatorLogger.warningMessage("Invalid year exception thrown");
-            System.out.println(e.invalidYearException());
+            System.out.println(e.getMessage());
         } catch (InvalidRunNumberException e) {
             SpartaSimulatorLogger.warningMessage("Invalid run number exception thrown");
-            System.out.println(e.invalidRunNumberException());
+            System.out.println(e.getMessage());
         } catch (InvalidCenterNumberException e) {
             SpartaSimulatorLogger.warningMessage("Invalid center number exception thrown");
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
