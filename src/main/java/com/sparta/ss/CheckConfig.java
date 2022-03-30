@@ -3,8 +3,11 @@ package com.sparta.ss;
 import com.sparta.ss.config.ConfigFilename;
 import com.sparta.ss.config.PropertiesLoader;
 import com.sparta.ss.exception.InvalidCenterNumberException;
+import com.sparta.ss.exception.InvalidChoiceOfOutput;
 import com.sparta.ss.exception.InvalidRunNumberException;
 import com.sparta.ss.exception.InvalidYearException;
+
+import java.util.Locale;
 
 public class CheckConfig {
     static  PropertiesLoader propertiesLoader = new PropertiesLoader();
@@ -47,5 +50,18 @@ public class CheckConfig {
             throw new InvalidRunNumberException();
         }
         return numberOfRuns;
+    }
+
+    public static String checkChoiceOfOutput(String filename) throws InvalidChoiceOfOutput {
+        String choiceOfOutput = null;
+        try {
+            choiceOfOutput= propertiesLoader.getProperties(filename).getProperty("choiceOfOutput");
+            if (!choiceOfOutput.toLowerCase().equals("year") && !choiceOfOutput.toLowerCase().equals("month")) {
+                throw new InvalidChoiceOfOutput();
+            }
+        }catch (Exception e){
+            throw new InvalidChoiceOfOutput();
+        }
+        return choiceOfOutput;
     }
 }
