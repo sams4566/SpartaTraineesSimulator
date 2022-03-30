@@ -8,11 +8,20 @@ import com.sparta.ss.trainee.TraineeManager;
 import java.util.ArrayList;
 
 public class TrainingCenter {
-    private ArrayList<Trainee> occupiedSeats;
+
+    public void setOccupiedSeats(int seatsToOccupy) {
+        while(seatsToOccupy != 0){
+            this.occupiedSeats.add(new Trainee());
+            seatsToOccupy--;
+        }
+
+    }
+
+    private ArrayList<Trainee> occupiedSeats = new ArrayList<>();
     private boolean isOpen = true;
 
     private boolean maxChecker() {
-        return this.occupiedSeats.size() != 100;
+        return this.occupiedSeats.size() <= 100;
     }
 
     public int getEmptySpaces(){

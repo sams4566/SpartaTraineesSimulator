@@ -13,9 +13,9 @@ public class AllocateTraineeTester {
         TrainingCenter centre1 = new TrainingCenter();
         TrainingCenter centre2 = new TrainingCenter();
         TrainingCenter centre3 = new TrainingCenter();
-        TrainingCenterManager.trainingCenters.add(centre1);
-        TrainingCenterManager.trainingCenters.add(centre2);
-        TrainingCenterManager.trainingCenters.add(centre3);
+        TrainingCenterManager.getTrainingCenters().add(centre1);
+        TrainingCenterManager.getTrainingCenters().add(centre2);
+        TrainingCenterManager.getTrainingCenters().add(centre3);
 //        allocateTrainees(150);
         Assertions.assertEquals(1,1);
     }
