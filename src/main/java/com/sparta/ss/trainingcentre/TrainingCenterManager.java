@@ -1,15 +1,25 @@
 package com.sparta.ss.trainingcentre;
 
+import com.sparta.ss.trainingcentre.TrainingCenter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class TrainingCenterManager {
 
-    static List<TrainingCenter> trainingCenters = new ArrayList<>();
+    public static List<TrainingCenter> trainingCenters = new ArrayList<>();
+
+    public static List<TechCentre> techCenters = new ArrayList<>();
+
+    public static void removeAllTrainingCenter(){
+         trainingCenters.removeAll(trainingCenters);
+    }
 
     public static List<TrainingCenter> getTrainingCenters() {
         return trainingCenters;
     }
+
+    public static List<TechCentre> getTechCenters() {return techCenters; }
 
     public static int getTotCenters() {
         return trainingCenters.size();
