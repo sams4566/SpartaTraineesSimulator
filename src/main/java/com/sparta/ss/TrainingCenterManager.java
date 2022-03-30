@@ -5,7 +5,11 @@ import java.util.List;
 
 public class TrainingCenterManager {
 
-    static List<TrainingCenter> trainingCenters = new ArrayList<>();
+    public static List<TrainingCenter> trainingCenters = new ArrayList<>();
+
+    public static void removeAllTrainingCenter(){
+         trainingCenters.removeAll(trainingCenters);
+    }
 
     public static List<TrainingCenter> getTrainingCenters() {
         return trainingCenters;

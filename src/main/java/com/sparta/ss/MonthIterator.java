@@ -27,6 +27,8 @@ public class MonthIterator {
         try {
             SpartaSimulatorLogger.InfoMessage("Getting number of runs");
             for (int i = 0; i < CheckConfig.checkNumberOfRuns(filename); i++) {
+                TrainingCenterManager.removeAllTrainingCenter();
+                waitingList =0;
                 SpartaSimulatorLogger.InfoMessage("Getting number of years");
                 for (int j = 1; j <= CheckConfig.checkNumberOfYears(filename) * 12; j++) {
                     if (j % 2 != 1) {
