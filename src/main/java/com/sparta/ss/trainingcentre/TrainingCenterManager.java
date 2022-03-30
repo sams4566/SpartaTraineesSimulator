@@ -1,5 +1,7 @@
 package com.sparta.ss.trainingcentre;
 
+import com.sparta.ss.trainingcentre.TrainingCenter;
+
 import java.util.ArrayList;
 import java.util.List;
 
