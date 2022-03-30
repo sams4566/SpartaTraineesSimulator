@@ -1,4 +1,4 @@
-package com.sparta.ss;
+package com.sparta.ss.trainingcentre;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,5 +1,7 @@
 package com.sparta.ss;
 
+import com.sparta.ss.trainingcentre.TrainingCenter;
+import com.sparta.ss.trainingcentre.TrainingCenterManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;

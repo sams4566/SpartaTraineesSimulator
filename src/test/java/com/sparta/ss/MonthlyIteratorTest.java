@@ -1,7 +1,8 @@
 package com.sparta.ss;
 
 import com.sparta.ss.config.ConfigFilename;
-import org.junit.jupiter.api.Assertions;
+import com.sparta.ss.trainee.TraineeManager;
+import com.sparta.ss.trainingcentre.TrainingCenterManager;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,13 +19,13 @@ public class MonthlyIteratorTest {
     @Test
     @DisplayName("Check waiting list is updated")
     void checkWaitingListIsUpdated() {
-        assertEquals(true,MonthIterator.getWaitingList()!=0);
+        assertEquals(true, TraineeManager.getWaitingList().size()!=0);
     }
 
     @Test
     @DisplayName("check centres are generated")
     void checkCentresAreGenerated() {
-        assertEquals(6,TrainingCenterManager.getTotCenters());
+        assertEquals(6, TrainingCenterManager.getTotCenters());
     }
 
     @Test
@@ -32,13 +33,13 @@ public class MonthlyIteratorTest {
     void checkCentresAreFilled() {
         assertEquals(true,TrainingCenterManager.getFullCenters() >= 1);
     }
-
+//
 //    @Test
 //    @DisplayName("check waiting list is not a negative number")
 //    void checkWaitingListIsNotANegativeNumber() {
 //        int i = 0;
 //        while(i<250){
-//            MonthIterator.monthIterator();
+//            MonthIterator.monthIterator(ConfigFilename.filename);
 //            Assertions.assertEquals(true,MonthIterator.getWaitingList()>=0);
 //            i++;
 //        }

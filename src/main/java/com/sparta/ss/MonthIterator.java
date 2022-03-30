@@ -6,18 +6,16 @@ import com.sparta.ss.exception.InvalidCenterNumberException;
 import com.sparta.ss.exception.InvalidRunNumberException;
 import com.sparta.ss.exception.InvalidYearException;
 import com.sparta.ss.logs.SpartaSimulatorLogger;
+import com.sparta.ss.trainee.Trainee;
+import com.sparta.ss.trainee.TraineeManager;
+import com.sparta.ss.trainingcentre.TrainingCenter;
+import com.sparta.ss.trainingcentre.TrainingCenterManager;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MonthIterator {
-
-    private static int waitingList = 0;
-
-    public static int getWaitingList() {
-        return waitingList;
-    }
 
     public static void monthIterator(String filename) {
         List<String[]> recordList = new ArrayList<>();
@@ -35,16 +33,16 @@ public class MonthIterator {
                     }
                     traineeAllocator();
                 }
-                String records[] = {String.valueOf(i + 1), String.valueOf(TrainingCenterManager.getOpenCenters()), String.valueOf(TrainingCenterManager.getFullCenters()), String.valueOf(TrainingCenterManager.getNumberTraineesInTraining()), String.valueOf(waitingList)};
+                String records[] = {String.valueOf(i + 1), String.valueOf(TrainingCenterManager.getOpenCenters()), String.valueOf(TrainingCenterManager.getFullCenters()), String.valueOf(TrainingCenterManager.getNumberTraineesInTraining()), String.valueOf(TraineeManager.getTrainees().size())};
                 recordList.add(records);
             }
 
             SpartaSimulatorLogger.InfoMessage("Creating CSV file");
-            ConvertCSVFile.createCVSFile(TrainingCenterManager.getOpenCenters(), TrainingCenterManager.getFullCenters(), TrainingCenterManager.getNumberTraineesInTraining(), waitingList);
+            ConvertCSVFile.createCVSFile(recordList);
             SpartaSimulatorLogger.InfoMessage("CSV file ready");
 
 
-            ConvertCSVFile.createCVSFile(recordList);
+
 
 
 
@@ -64,15 +62,30 @@ public class MonthIterator {
         public static void traineeAllocator () {
             SpartaSimulatorLogger.InfoMessage("Updating the waiting list");
             int numberOfTrainees = RandomGenerator.getRandomTrainees();
-
+            numberOfTrainees = addToNewTraineesList(numberOfTrainees);
             if (TrainingCenterManager.getOpenCenters() == 0) {
-                waitingList += numberOfTrainees;
+                addToWaitingList(numberOfTrainees);
             } else {
-                waitingList = TrainingCenter.allocateTrainees(waitingList, numberOfTrainees);
+                TrainingCenter.allocateTrainees();
             }
         }
 
-        private int getProperty (String property){
+    private static int addToNewTraineesList(int numberOfTrainees) {
+        while(numberOfTrainees != 0 ){
+            TraineeManager.getTrainees().add(new Trainee());
+            numberOfTrainees--;
+        }
+        return numberOfTrainees;
+    }
+
+    private static void addToWaitingList(int numberOfTrainees) {
+        while(numberOfTrainees != 0){
+            TraineeManager.getWaitingList().add(new Trainee());
+            numberOfTrainees--;
+        }
+    }
+
+    private int getProperty (String property){
             return Integer.parseInt(PropertiesLoader.getProperties(ConfigFilename.filename).getProperty(property));
         }
 
