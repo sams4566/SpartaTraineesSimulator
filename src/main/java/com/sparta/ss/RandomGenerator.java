@@ -15,4 +15,11 @@ public class RandomGenerator {
         int numberTrainees = random.nextInt(51);
         return numberTrainees;
     }
+
+    public static String getRandomCourse(){
+        Random random = new Random();
+        int courseSelector = random.nextInt(6);
+        String[] courses = {"Java", "C#","Data","DevOps","Business"};
+        return courses[courseSelector];
+    }
 }
