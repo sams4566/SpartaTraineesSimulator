@@ -15,7 +15,7 @@ public class ConvertCSVFile {
 
     public static void createCVSFile(List list) {
 
-        String[] headers = new String[]{"Number of runs", "Open centers", "Full centers", "Trainees currently training", "Trainees on the waiting list"};
+        String[] headers = new String[]{"Number of runs", "Number of Month", "Open centers", "Full centers", "Trainees currently training", "Trainees on the waiting list"};
 
         List<String[]> records = new ArrayList<>();
         records.add(headers);
