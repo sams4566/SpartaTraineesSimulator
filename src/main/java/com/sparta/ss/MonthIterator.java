@@ -37,7 +37,7 @@ public class MonthIterator {
                         }
                     }
                     traineeAllocator();
-                    String records[] = {String.valueOf(i + 1), String.valueOf(TrainingCenterManager.getOpenCenters()), String.valueOf(TrainingCenterManager.getFullCenters()), String.valueOf(TrainingCenterManager.getNumberTraineesInTraining()), String.valueOf(waitingList)};
+                    String records[] = {String.valueOf(i + 1), String.valueOf(j), String.valueOf(TrainingCenterManager.getOpenCenters()), String.valueOf(TrainingCenterManager.getFullCenters()), String.valueOf(TrainingCenterManager.getNumberTraineesInTraining()), String.valueOf(waitingList)};
                     recordList.add(records);
                     if(CheckConfig.checkChoiceOfOutput(filename).toLowerCase().equals("month")){
                         ConvertCSVFile.createCVSFile(recordList);
