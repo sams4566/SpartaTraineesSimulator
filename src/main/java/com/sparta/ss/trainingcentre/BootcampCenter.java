@@ -8,8 +8,17 @@ public class BootcampCenter extends TrainingCenter{
         return getOccupiedSeats() == 500;
     }
 
-
     public void setConsLowAttendance(int consLowAttendance) {
         this.consLowAttendance = consLowAttendance;
     }
+
+
+    public static void main(String[] args) {
+
+        BootcampCenter bootcampCenter = new BootcampCenter();
+
+
+
+    }
+
 }
