@@ -3,6 +3,7 @@ package com.sparta.ss;
 import com.sparta.ss.config.ConfigFilename;
 import com.sparta.ss.config.PropertiesLoader;
 import com.sparta.ss.exception.InvalidCenterNumberException;
+import com.sparta.ss.exception.InvalidChoiceOfOutput;
 import com.sparta.ss.exception.InvalidRunNumberException;
 import com.sparta.ss.exception.InvalidYearException;
 import com.sparta.ss.logs.SpartaSimulatorLogger;
@@ -34,18 +35,22 @@ public class MonthIterator {
                         }
                     }
                     traineeAllocator();
+                    String records[] = {String.valueOf(i + 1), String.valueOf(TrainingCenterManager.getOpenCenters()), String.valueOf(TrainingCenterManager.getFullCenters()), String.valueOf(TrainingCenterManager.getNumberTraineesInTraining()), String.valueOf(waitingList)};
+                    recordList.add(records);
+                    if(CheckConfig.checkChoiceOfOutput(filename).toLowerCase() == "month"){
+                        ConvertCSVFile.createCVSFile(recordList);
+                    }
+
                 }
-                String records[] = {String.valueOf(i + 1), String.valueOf(TrainingCenterManager.getOpenCenters()), String.valueOf(TrainingCenterManager.getFullCenters()), String.valueOf(TrainingCenterManager.getNumberTraineesInTraining()), String.valueOf(waitingList)};
-                recordList.add(records);
+
             }
 
             SpartaSimulatorLogger.InfoMessage("Creating CSV file");
-            ConvertCSVFile.createCVSFile(TrainingCenterManager.getOpenCenters(), TrainingCenterManager.getFullCenters(), TrainingCenterManager.getNumberTraineesInTraining(), waitingList);
             SpartaSimulatorLogger.InfoMessage("CSV file ready");
 
-
-            ConvertCSVFile.createCVSFile(recordList);
-
+            if(CheckConfig.checkChoiceOfOutput(filename).toLowerCase() == "year") {
+                ConvertCSVFile.createCVSFile(recordList);
+            }
 
 
         } catch (InvalidYearException e) {
@@ -56,6 +61,9 @@ public class MonthIterator {
             System.out.println(e.getMessage());
         } catch (InvalidCenterNumberException e) {
             SpartaSimulatorLogger.warningMessage("Invalid center number exception thrown");
+            System.out.println(e.getMessage());
+        } catch (InvalidChoiceOfOutput e) {
+            SpartaSimulatorLogger.warningMessage("Invalid choice of output exception thrown");
             System.out.println(e.getMessage());
         }
     }
