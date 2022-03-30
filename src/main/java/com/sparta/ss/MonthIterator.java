@@ -20,7 +20,8 @@ public class MonthIterator {
 
     public static void monthIterator(String filename) {
 
-        List<String[]> recordList = new ArrayList<>();
+        List<String[]> recordPerYearList = new ArrayList<>();
+        List<String[]> recordPerMonthList = new ArrayList<>();
 
         try {
             SpartaSimulatorLogger.InfoMessage("Getting number of runs");
@@ -38,22 +39,16 @@ public class MonthIterator {
                         }
                     }
                     traineeAllocator();
+
                     String records[] = {String.valueOf(i + 1), String.valueOf(j), String.valueOf(TrainingCenterManager.getOpenCenters()), String.valueOf(TrainingCenterManager.getFullCenters()), String.valueOf(TrainingCenterManager.getNumberTraineesInTraining()), String.valueOf(TraineeManager.getWaitingList().size())};
-                    recordList.add(records);
-                    if (CheckConfig.checkChoiceOfOutput(filename).toLowerCase().equals("month")) {
-                        ConvertCSVFile.createCVSFile(recordList);
-                    }
+                    recordPerMonthList.add(records);
 
                 }
-
-                SpartaSimulatorLogger.InfoMessage("Creating CSV file");
-                ConvertCSVFile.createCVSFile(recordList);
-                SpartaSimulatorLogger.InfoMessage("CSV file ready");
-
-                if (CheckConfig.checkChoiceOfOutput(filename).toLowerCase().equals("year")) {
-                    ConvertCSVFile.createCVSFile(recordList);
-                }
+                String records[] = {String.valueOf(i + 1), String.valueOf(TrainingCenterManager.getOpenCenters()), String.valueOf(TrainingCenterManager.getFullCenters()), String.valueOf(TrainingCenterManager.getNumberTraineesInTraining()), String.valueOf(TraineeManager.getWaitingList().size())};
+                recordPerYearList.add(records);
             }
+            SpartaSimulatorLogger.InfoMessage("Creating CSV file");
+
 
             } catch(InvalidYearException e){
                 SpartaSimulatorLogger.warningMessage("Invalid year exception thrown");
@@ -67,9 +62,28 @@ public class MonthIterator {
             } catch(InvalidChoiceOfOutput e){
                 SpartaSimulatorLogger.warningMessage("Invalid choice of output exception thrown");
                 System.out.println(e.getMessage());
+          
+            if (CheckConfig.checkChoiceOfOutput(filename).equalsIgnoreCase("year")) {
+                ConvertCSVFile.createYearCVSFile(recordPerYearList);
+            } else if (CheckConfig.checkChoiceOfOutput(filename).equalsIgnoreCase("month")) {
+                ConvertCSVFile.createMonthCVSFile(recordPerMonthList);
             }
-        }
+            SpartaSimulatorLogger.InfoMessage("CSV file ready");
 
+        } catch (InvalidYearException e) {
+            SpartaSimulatorLogger.warningMessage("Invalid year exception thrown");
+            System.out.println(e.getMessage());
+        } catch (InvalidRunNumberException e) {
+            SpartaSimulatorLogger.warningMessage("Invalid run number exception thrown");
+            System.out.println(e.getMessage());
+        } catch (InvalidCenterNumberException e) {
+            SpartaSimulatorLogger.warningMessage("Invalid center number exception thrown");
+            System.out.println(e.getMessage());
+        } catch (InvalidChoiceOfOutput e) {
+            SpartaSimulatorLogger.warningMessage("Invalid choice of output exception thrown");
+            System.out.println(e.getMessage());
+        }
+    }
 
 
 
@@ -82,24 +96,29 @@ public class MonthIterator {
             } else {
                 TrainingCenter.allocateTrainees();
             }
+
         }
+    }
 
         private static void addToNewTraineesList ( int numberOfTrainees){
             while (numberOfTrainees != 0) {
                 TraineeManager.getTrainees().add(new Trainee());
                 numberOfTrainees--;
             }
-        }
 
-        private static void addToWaitingList ( int numberOfTrainees){
-            while (numberOfTrainees != 0) {
-                TraineeManager.getWaitingList().add(new Trainee());
-                numberOfTrainees--;
-            }
         }
+        return numberOfTrainees;
+    }
 
-        private int getProperty (String property){
-            return Integer.parseInt(PropertiesLoader.getProperties(ConfigFilename.filename).getProperty(property));
+    private static void addToWaitingList(int numberOfTrainees) {
+        while (numberOfTrainees != 0) {
+            TraineeManager.getWaitingList().add(new Trainee());
+            numberOfTrainees--;
         }
     }
+
+    private int getProperty(String property) {
+        return Integer.parseInt(PropertiesLoader.getProperties(ConfigFilename.filename).getProperty(property));
+    }
+}
 

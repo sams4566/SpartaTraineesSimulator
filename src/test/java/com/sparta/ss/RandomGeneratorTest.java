@@ -4,10 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.sparta.ss.RandomGenerator.getNumberOfTraineesForCenter;
-import static com.sparta.ss.RandomGenerator.getRandomTrainees;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static com.sparta.ss.RandomGenerator.*;
 
 public class RandomGeneratorTest {
     @Test
@@ -29,4 +26,14 @@ public class RandomGeneratorTest {
             Assertions.assertTrue(value <= 50 && value >= 0);
         }
     }
+
+//    @Test
+//    @DisplayName("getRandomCourse returns 5 job streams at random")
+//    void getRandomCourseReturns5JobStreamsAtRandom() {
+//        for (int i = 0; i < 19; i++) {
+//            String value = getRandomCourse();
+//            System.out.println(value);
+//            Assertions.assertEquals("Java" || "C#" || "Data" || "DevOps" || "Business", getRandomCourse());
+//        }
+//    }
 }
