@@ -21,7 +21,9 @@ public class MonthIterator {
     }
 
     public static void monthIterator(String filename) {
+
         List<String[]> recordList = new ArrayList<>();
+
         try {
             SpartaSimulatorLogger.InfoMessage("Getting number of runs");
             for (int i = 0; i < CheckConfig.checkNumberOfRuns(filename); i++) {
@@ -37,7 +39,7 @@ public class MonthIterator {
                     traineeAllocator();
                     String records[] = {String.valueOf(i + 1), String.valueOf(TrainingCenterManager.getOpenCenters()), String.valueOf(TrainingCenterManager.getFullCenters()), String.valueOf(TrainingCenterManager.getNumberTraineesInTraining()), String.valueOf(waitingList)};
                     recordList.add(records);
-                    if(CheckConfig.checkChoiceOfOutput(filename).toLowerCase() == "month"){
+                    if(CheckConfig.checkChoiceOfOutput(filename).toLowerCase().equals("month")){
                         ConvertCSVFile.createCVSFile(recordList);
                     }
 
@@ -46,9 +48,10 @@ public class MonthIterator {
             }
 
             SpartaSimulatorLogger.InfoMessage("Creating CSV file");
+
             SpartaSimulatorLogger.InfoMessage("CSV file ready");
 
-            if(CheckConfig.checkChoiceOfOutput(filename).toLowerCase() == "year") {
+            if(CheckConfig.checkChoiceOfOutput(filename).toLowerCase().equals("year")) {
                 ConvertCSVFile.createCVSFile(recordList);
             }
 

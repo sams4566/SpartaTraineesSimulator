@@ -24,11 +24,7 @@ public class ConvertCSVFile {
             records.add((String[]) list.get(i));
         }
 
-        File directory=new File("src/main/resources/");
-        int fileCount=directory.list().length;
-        System.out.println("File Count:"+fileCount);
-
-        String csvName = "";
+        //try (CSVWriter writer = new CSVWriter(new FileWriter("src/main/resources/output.csv"))) {
 
         createFile(records);
 
@@ -48,6 +44,7 @@ public class ConvertCSVFile {
             fileName = FILENAME + numFile + CSV_EXT;
         }
         try (CSVWriter writer = new CSVWriter(new FileWriter(fileName))) {
+
             writer.writeAll(records);
         } catch (IOException e) {
             e.printStackTrace();
