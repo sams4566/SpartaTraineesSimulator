@@ -17,4 +17,6 @@ public class TraineeManager {
     public static ArrayList<Trainee> getWaitingList() {
         return waitingList;
     }
+
 }
+

@@ -33,7 +33,7 @@ public class MonthIterator {
                 for (int j = 1; j <= CheckConfig.checkNumberOfYears(filename) * 12; j++) {
                     if (j % 2 != 1) {
                         SpartaSimulatorLogger.InfoMessage("Generating training center");
-                        for (int t = 0; t < CheckConfig.checkNumberOfCentersGenerated(filename); t++) {
+                        for (int t = 0; t < 1; t++) {
                             TrainingCenter trainingCenter = new TrainingCenter();
                             TrainingCenterManager.getTrainingCenters().add(trainingCenter);
                         }
@@ -49,6 +49,20 @@ public class MonthIterator {
             }
             SpartaSimulatorLogger.InfoMessage("Creating CSV file");
 
+
+            } catch(InvalidYearException e){
+                SpartaSimulatorLogger.warningMessage("Invalid year exception thrown");
+                System.out.println(e.getMessage());
+            } catch(InvalidRunNumberException e){
+                SpartaSimulatorLogger.warningMessage("Invalid run number exception thrown");
+                System.out.println(e.getMessage());
+//            } catch(InvalidCenterNumberException e){
+//                SpartaSimulatorLogger.warningMessage("Invalid center number exception thrown");
+//                System.out.println(e.getMessage());
+            } catch(InvalidChoiceOfOutput e){
+                SpartaSimulatorLogger.warningMessage("Invalid choice of output exception thrown");
+                System.out.println(e.getMessage());
+          
             if (CheckConfig.checkChoiceOfOutput(filename).equalsIgnoreCase("year")) {
                 ConvertCSVFile.createYearCVSFile(recordPerYearList);
             } else if (CheckConfig.checkChoiceOfOutput(filename).equalsIgnoreCase("month")) {
@@ -72,21 +86,26 @@ public class MonthIterator {
     }
 
 
-    public static void traineeAllocator() {
-        SpartaSimulatorLogger.InfoMessage("Updating the waiting list");
-        int numberOfTrainees = RandomGenerator.getRandomTrainees();
-        numberOfTrainees = addToNewTraineesList(numberOfTrainees);
-        if (TrainingCenterManager.getOpenCenters() == 0) {
-            addToWaitingList(numberOfTrainees);
-        } else {
-            TrainingCenter.allocateTrainees();
+
+        public static void traineeAllocator () {
+            SpartaSimulatorLogger.InfoMessage("Updating the waiting list");
+            int numberOfTrainees = RandomGenerator.getRandomTrainees();
+            addToNewTraineesList(numberOfTrainees);
+            if (TrainingCenterManager.getOpenCenters() == 0) {
+                addToWaitingList(numberOfTrainees);
+            } else {
+                TrainingCenter.allocateTrainees();
+            }
+
         }
     }
 
-    private static int addToNewTraineesList(int numberOfTrainees) {
-        while (numberOfTrainees != 0) {
-            TraineeManager.getTrainees().add(new Trainee());
-            numberOfTrainees--;
+        private static void addToNewTraineesList ( int numberOfTrainees){
+            while (numberOfTrainees != 0) {
+                TraineeManager.getTrainees().add(new Trainee());
+                numberOfTrainees--;
+            }
+
         }
         return numberOfTrainees;
     }

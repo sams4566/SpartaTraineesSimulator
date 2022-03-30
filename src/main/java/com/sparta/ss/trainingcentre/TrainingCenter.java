@@ -6,6 +6,7 @@ import com.sparta.ss.trainee.Trainee;
 import com.sparta.ss.trainee.TraineeManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TrainingCenter {
 
@@ -36,9 +37,9 @@ public class TrainingCenter {
         SpartaSimulatorLogger.InfoMessage("Allocating trainees");
         for (TrainingCenter centre : TrainingCenterManager.trainingCenters) {
             if (TraineeManager.getWaitingList().size() > 0 && centre.isOpen) {
-                putIntoTrainingCentre(TraineeManager.getWaitingList(), centre);
+                TraineeManager.setWaitingList(putIntoTrainingCentre(TraineeManager.getWaitingList(), centre));
             } else if(TraineeManager.getTrainees().size() > 0 && centre.isOpen){
-                putIntoTrainingCentre(TraineeManager.getTrainees(), centre);
+                TraineeManager.setTrainees(putIntoTrainingCentre(TraineeManager.getTrainees(), centre));
             }
         }
         while (TraineeManager.getTrainees().size() != 0){
@@ -50,7 +51,7 @@ public class TrainingCenter {
 
     private static ArrayList<Trainee> putIntoTrainingCentre(ArrayList<Trainee> trainees, TrainingCenter centre) {
         int amountToAllocate = RandomGenerator.getNumberOfTraineesForCenter();
-        while(amountToAllocate >= trainees.size() ) {
+        while(amountToAllocate > 0 ) {
             if (amountToAllocate > trainees.size()) {
                 amountToAllocate = trainees.size();
             }
@@ -58,20 +59,17 @@ public class TrainingCenter {
                 centre.occupiedSeats.add(trainees.get(0));
                 trainees.remove(0);
 
-            } else if (amountToAllocate + centre.occupiedSeats.size() == 100) {
+            } else if (centre.occupiedSeats.size() == 99) {
                 centre.occupiedSeats.add(trainees.get(0));
                 centre.isOpen = false;
                 trainees.remove(0);
                 return trainees;
 
             } else {
-                while(centre.getEmptySpaces() != 0){
-                    centre.occupiedSeats.add(trainees.get(0));
-                    trainees.remove(0);
-                }
                 centre.isOpen = false;
                 return trainees;
             }
+            amountToAllocate--;
         }
         return trainees;
 
