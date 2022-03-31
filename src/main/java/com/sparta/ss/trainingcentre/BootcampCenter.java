@@ -74,10 +74,12 @@ public class BootcampCenter {
             }
             if (amountToAllocate + centre.occupiedSeats.size() < 100) {
                 centre.occupiedSeats.add(trainees.get(0));
+                TraineeManager.currentlyTrainingTrainees.add(trainees.get(0));
                 trainees.remove(0);
 
             } else if (amountToAllocate + centre.occupiedSeats.size() == 100) {
                 centre.occupiedSeats.add(trainees.get(0));
+                TraineeManager.currentlyTrainingTrainees.add(trainees.get(0));
                 centre.isOpen = false;
                 trainees.remove(0);
                 return trainees;
@@ -85,6 +87,7 @@ public class BootcampCenter {
             } else {
                 while(centre.getEmptySpaces() != 0){
                     centre.occupiedSeats.add(trainees.get(0));
+                    TraineeManager.currentlyTrainingTrainees.add(trainees.get(0));
                     trainees.remove(0);
                 }
                 centre.isOpen = false;

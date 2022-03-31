@@ -11,7 +11,7 @@ public class TechCentre {
     private static final int maxTrainee = 200;
     private ArrayList<Trainee> occupiedSeats = new ArrayList<>();
     private boolean isOpen = true;
-    String course;
+    private String course;
 
     public void setOccupiedSeats(int seatsToOccupy) {
         while(seatsToOccupy != 0){
@@ -63,10 +63,12 @@ public class TechCentre {
             if(trainees.get(0).getCourse().equals(centre.course)) {
                 if (amountToAllocate + centre.occupiedSeats.size() < maxTrainee) {
                     centre.occupiedSeats.add(trainees.get(0));
+                    TraineeManager.currentlyTrainingTrainees.add(trainees.get(0));
                     trainees.remove(0);
 
                 } else if (amountToAllocate + centre.occupiedSeats.size() == maxTrainee) {
                     centre.occupiedSeats.add(trainees.get(0));
+                    TraineeManager.currentlyTrainingTrainees.add(trainees.get(0));
                     centre.isOpen = false;
                     trainees.remove(0);
                     return trainees;
@@ -74,6 +76,7 @@ public class TechCentre {
                 } else {
                     while (centre.getEmptySpaces() != 0) {
                         centre.occupiedSeats.add(trainees.get(0));
+                        TraineeManager.currentlyTrainingTrainees.add(trainees.get(0));
                         trainees.remove(0);
                     }
                     centre.isOpen = false;

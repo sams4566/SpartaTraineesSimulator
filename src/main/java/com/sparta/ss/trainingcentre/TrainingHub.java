@@ -59,10 +59,12 @@ public class TrainingHub {
             }
             if (amountToAllocate + hub.occupiedSeats.size() < 100) {
                 hub.occupiedSeats.add(trainees.get(0));
+                TraineeManager.currentlyTrainingTrainees.add(trainees.get(0));
                 trainees.remove(0);
 
             } else if (amountToAllocate + hub.occupiedSeats.size() == 100) {
                 hub.occupiedSeats.add(trainees.get(0));
+                TraineeManager.currentlyTrainingTrainees.add(trainees.get(0));
                 hub.isOpen = false;
                 trainees.remove(0);
                 return trainees;
@@ -70,6 +72,7 @@ public class TrainingHub {
             } else {
                 while(hub.getEmptySpaces() != 0){
                     hub.occupiedSeats.add(trainees.get(0));
+                    TraineeManager.currentlyTrainingTrainees.add(trainees.get(0));
                     trainees.remove(0);
                 }
                 hub.isOpen = false;

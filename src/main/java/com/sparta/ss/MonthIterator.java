@@ -8,6 +8,7 @@ import com.sparta.ss.exception.InvalidRunNumberException;
 import com.sparta.ss.exception.InvalidYearException;
 import com.sparta.ss.logs.SpartaSimulatorLogger;
 import com.sparta.ss.trainee.Trainee;
+import com.sparta.ss.trainee.TraineeBench;
 import com.sparta.ss.trainee.TraineeManager;
 import com.sparta.ss.trainingcentre.*;
 import com.sparta.ss.trainingcentre.TechCentre;
@@ -34,6 +35,7 @@ public class MonthIterator {
                 TraineeManager.removeAllTraineesFromWaitingList();
                 SpartaSimulatorLogger.InfoMessage("Getting number of years");
                 for (int j = 1; j <= CheckConfig.checkNumberOfYears(filename) * 12; j++) {
+                    TraineeBench.gettingTraineesToBench();
                     if (j % 2 != 1) {
                         SpartaSimulatorLogger.InfoMessage("Generating training center");
                         generateTrainingCenter();
@@ -70,6 +72,7 @@ public class MonthIterator {
             System.out.println(e.getMessage());
         }
     }
+
 
     private static String[] getRecords(int i, int j) {
         String records[] = {String.valueOf(i + 1), String.valueOf(j),
