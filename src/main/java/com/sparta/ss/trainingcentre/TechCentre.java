@@ -11,12 +11,17 @@ public class TechCentre {
     private static final int maxTrainee = 200;
     private ArrayList<Trainee> occupiedSeats = new ArrayList<>();
     private boolean isOpen = true;
+    String course;
 
     public void setOccupiedSeats(int seatsToOccupy) {
         while(seatsToOccupy != 0){
             this.occupiedSeats.add(new Trainee());
             seatsToOccupy--;
         }
+    }
+
+    public TechCentre() {
+        this.course = RandomGenerator.getRandomCourse();
     }
 
     public boolean isLessThan25() { return occupiedSeats.size() <= 25; }
@@ -55,23 +60,25 @@ public class TechCentre {
             if (amountToAllocate > trainees.size()) {
                 amountToAllocate = trainees.size();
             }
-            if (amountToAllocate + centre.occupiedSeats.size() < maxTrainee) {
-                centre.occupiedSeats.add(trainees.get(0));
-                trainees.remove(0);
-
-            } else if (amountToAllocate + centre.occupiedSeats.size() == maxTrainee) {
-                centre.occupiedSeats.add(trainees.get(0));
-                centre.isOpen = false;
-                trainees.remove(0);
-                return trainees;
-
-            } else {
-                while(centre.getEmptySpaces() != 0){
+            if(trainees.get(0).getCourse().equals(centre.course)) {
+                if (amountToAllocate + centre.occupiedSeats.size() < maxTrainee) {
                     centre.occupiedSeats.add(trainees.get(0));
                     trainees.remove(0);
+
+                } else if (amountToAllocate + centre.occupiedSeats.size() == maxTrainee) {
+                    centre.occupiedSeats.add(trainees.get(0));
+                    centre.isOpen = false;
+                    trainees.remove(0);
+                    return trainees;
+
+                } else {
+                    while (centre.getEmptySpaces() != 0) {
+                        centre.occupiedSeats.add(trainees.get(0));
+                        trainees.remove(0);
+                    }
+                    centre.isOpen = false;
+                    return trainees;
                 }
-                centre.isOpen = false;
-                return trainees;
             }
         }
         return trainees;

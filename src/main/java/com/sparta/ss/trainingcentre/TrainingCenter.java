@@ -46,18 +46,14 @@ public class TrainingCenter {
             TraineeManager.getWaitingList().add(TraineeManager.getTrainees().get(0));
             TraineeManager.getTrainees().remove(0);
         }
-
     }
 
     private static ArrayList<Trainee> putIntoTrainingCentre(ArrayList<Trainee> trainees, TrainingCenter centre) {
         int amountToAllocate = RandomGenerator.getNumberOfTraineesForCenter();
-
         if (amountToAllocate > trainees.size()) {
             amountToAllocate = trainees.size();
-
         }
         while(amountToAllocate > 0 ) {
-
             if (centre.occupiedSeats.size() < 99) {
                 centre.occupiedSeats.add(trainees.get(0));
                 trainees.remove(0);
@@ -75,7 +71,6 @@ public class TrainingCenter {
             amountToAllocate--;
         }
         return trainees;
-
     }
 
 
