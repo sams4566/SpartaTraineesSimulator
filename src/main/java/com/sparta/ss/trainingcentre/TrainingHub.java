@@ -9,15 +9,15 @@ import java.util.ArrayList;
 
 public class TrainingHub {
 
+    private ArrayList<Trainee> occupiedSeats = new ArrayList<>();
+    private boolean isOpen = true;
+
     public void setOccupiedSeats(int seatsToOccupy) {
         while(seatsToOccupy != 0){
             this.occupiedSeats.add(new Trainee());
             seatsToOccupy--;
         }
     }
-
-    private ArrayList<Trainee> occupiedSeats = new ArrayList<>();
-    private boolean isOpen = true;
 
     private boolean maxChecker() {
         return this.occupiedSeats.size() <= 100;
