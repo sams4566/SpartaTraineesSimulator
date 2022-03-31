@@ -26,7 +26,15 @@ public class RandomGenerator {
     public static String getRandomTrainingCenter(){
         Random random = new Random();
         int trainingCenterSelector = random.nextInt(3);
-        String[] trainingCenter = {"TrainingHub", "BootCamp","TrainingCenter"};
+        String[] trainingCenter = {"TrainingHub", "BootCamp","TechCenter"};
         return trainingCenter[trainingCenterSelector];
     }
+
+    public static String getRandomTrainingCenterTwo(){
+        Random random = new Random();
+        int trainingCenterSelector = random.nextInt(2);
+        String[] trainingCenter = {"TrainingHub", "BootCamp"};
+        return trainingCenter[trainingCenterSelector];
+    }
+
 }
