@@ -14,6 +14,8 @@ public class TrainingCenterManager {
 
     public static List<TechCentre> techCenters = new ArrayList<>();
 
+    public static List<BootcampCenter> bootcampCenters = new ArrayList<>();
+
 
     public static void removeAllTrainingCenter(){
          trainingCenters.removeAll(trainingCenters);
