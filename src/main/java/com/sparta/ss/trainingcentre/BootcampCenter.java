@@ -20,8 +20,8 @@ public class BootcampCenter {
     private static int maxBootcamp = 2;
 
 
-    public void setConsLowAttendance(int consLowAttendance) {
-        this.consLowAttendance = consLowAttendance;
+    public void increaseConsLowAttendance() {
+        this.consLowAttendance ++;
     }
 
     public boolean isLessThan25() {
@@ -53,7 +53,7 @@ public class BootcampCenter {
 
     public static void allocateTrainees() {
         SpartaSimulatorLogger.InfoMessage("Allocating trainees");
-        for (BootcampCenter centre : TrainingCenterManager.bootcampCenters) {
+        for (BootcampCenter centre : TrainingCenterManager.getBootcampCenters()) {
             if (TraineeManager.getWaitingList().size() > 0 && centre.isOpen) {
                 putIntoTrainingCentre(TraineeManager.getWaitingList(), centre);
             } else if(TraineeManager.getTrainees().size() > 0 && centre.isOpen){

@@ -18,5 +18,8 @@ public class TraineeManager {
         return waitingList;
     }
 
+    public static int getTraineeWaitingCount(String course){
+        return (int) waitingList.stream().filter(trainee -> trainee.getCourse().equals(course)).count();
+    }
 }
 

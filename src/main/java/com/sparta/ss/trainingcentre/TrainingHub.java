@@ -37,7 +37,7 @@ public class TrainingHub {
 
     public static void allocateTrainees() {
         SpartaSimulatorLogger.InfoMessage("Allocating trainees to Training Hub");
-        for (TrainingHub hub : TrainingCenterManager.trainingHubs) {
+        for (TrainingHub hub : TrainingCenterManager.getTrainingHub()) {
             if (TraineeManager.getWaitingList().size() > 0 && hub.isOpen) {
                 putIntoTrainingCentre(TraineeManager.getWaitingList(), hub);
             } else if(TraineeManager.getTrainees().size() > 0 && hub.isOpen){

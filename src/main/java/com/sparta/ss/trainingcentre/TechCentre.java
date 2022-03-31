@@ -40,7 +40,7 @@ public class TechCentre {
 
     public static void allocateTrainees() {
         SpartaSimulatorLogger.InfoMessage("Allocating trainees to Tech Centre");
-        for (TechCentre centre : TrainingCenterManager.techCenters) {
+        for (TechCentre centre : TrainingCenterManager.getTechCenters()) {
             if (TraineeManager.getWaitingList().size() > 0 && centre.isOpen) {
                 putIntoTrainingCentre(TraineeManager.getWaitingList(), centre);
             } else if(TraineeManager.getTrainees().size() > 0 && centre.isOpen){

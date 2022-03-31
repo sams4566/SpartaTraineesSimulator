@@ -32,7 +32,26 @@ public class ConvertCSVFile {
 
     public static void createMonthCVSFile(List list) {
 
-        String[] headers = new String[]{"Number of runs", "Number of Month", "Open centers", "Full centers", "Trainees currently training", "Trainees on the waiting list"};
+        String[] headers = new String[]{"Number of runs", "Number of Month",
+                "Open Training hub centers",
+                "Open Tech center centers",
+                "Open Bootcamp centers",
+                "Closed Training hub centers",
+                "Closed Tech center centers",
+                "Closed Bootcamp centers",
+                "Full Training hub centers",
+                "Full Tech center centers",
+                "Full Bootcamp centers",
+                "Trainees currently training Java",
+                "Trainees currently training C#",
+                "Trainees currently training Data",
+                "Trainees currently training DevOps",
+                "Trainees currently training Business",
+                "Trainees currently waiting that studied Java",
+                "Trainees currently waiting that studied C#",
+                "Trainees currently waiting that studied Data",
+                "Trainees currently waiting that studied DevOps",
+                "Trainees currently waiting that studied Business"};
 
         List<String[]> records = new ArrayList<>();
         records.add(headers);
