@@ -9,14 +9,8 @@ import java.util.ArrayList;
 
 public class TechCentre {
     private static final int maxTrainee = 200;
-
-    private boolean isOpen = true;
-
     private ArrayList<Trainee> occupiedSeats = new ArrayList<>();
-
-    public int getMaxTrainee() {
-        return maxTrainee;
-    }
+    private boolean isOpen = true;
 
     public void setOccupiedSeats(int seatsToOccupy) {
         while(seatsToOccupy != 0){
@@ -24,6 +18,8 @@ public class TechCentre {
             seatsToOccupy--;
         }
     }
+
+    public boolean isLessThan25() { return occupiedSeats.size() <= 25; }
 
     private boolean maxChecker() {
         return this.occupiedSeats.size() <= maxTrainee;
@@ -38,15 +34,12 @@ public class TechCentre {
     }
 
     public static void allocateTrainees() {
-        SpartaSimulatorLogger.InfoMessage("Allocating trainees");
+        SpartaSimulatorLogger.InfoMessage("Allocating trainees to Tech Centre");
         for (TechCentre centre : TrainingCenterManager.techCenters) {
-            if (centre.isOpen) {
-                if (TraineeManager.getWaitingList().size() > 0) {
-                    putIntoTrainingCentre(TraineeManager.getWaitingList(), centre);
-                }
-                else if (TraineeManager.getTrainees().size() > 0){
-                    putIntoTrainingCentre(TraineeManager.getTrainees(), centre);
-                }
+            if (TraineeManager.getWaitingList().size() > 0 && centre.isOpen) {
+                putIntoTrainingCentre(TraineeManager.getWaitingList(), centre);
+            } else if(TraineeManager.getTrainees().size() > 0 && centre.isOpen){
+                putIntoTrainingCentre(TraineeManager.getTrainees(), centre);
             }
         }
         while (TraineeManager.getTrainees().size() != 0){
@@ -84,7 +77,8 @@ public class TechCentre {
         return trainees;
 
     }
+
     public boolean checkVacancy() {
         return maxChecker();
-    }
+    } 
 }
