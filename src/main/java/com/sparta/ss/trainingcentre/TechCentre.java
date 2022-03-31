@@ -42,10 +42,10 @@ public class TechCentre {
         for (TechCentre centre : TrainingCenterManager.techCenters) {
             if (centre.isOpen) {
                 if (TraineeManager.getWaitingList().size() > 0) {
-                    TraineeManager.setWaitingList(putIntoTrainingCentre(TraineeManager.getWaitingList(), centre));
+                    putIntoTrainingCentre(TraineeManager.getWaitingList(), centre);
                 }
                 else if (TraineeManager.getTrainees().size() > 0){
-                    TraineeManager.setTrainees(putIntoTrainingCentre(TraineeManager.getTrainees(), centre));
+                    putIntoTrainingCentre(TraineeManager.getTrainees(), centre);
                 }
             }
         }
