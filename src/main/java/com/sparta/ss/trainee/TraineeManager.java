@@ -18,5 +18,13 @@ public class TraineeManager {
         return waitingList;
     }
 
+    public static void setTrainees(ArrayList<Trainee> trainees) {
+        TraineeManager.trainees = trainees;
+    }
+
+    public static void setWaitingList(ArrayList<Trainee> waitingList) {
+        TraineeManager.waitingList = waitingList;
+    }
+
 }
 
