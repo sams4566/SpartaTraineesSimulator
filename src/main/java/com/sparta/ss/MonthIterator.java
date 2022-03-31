@@ -36,12 +36,25 @@ public class MonthIterator {
                 for (int j = 1; j <= CheckConfig.checkNumberOfYears(filename) * 12; j++) {
                     if (j % 2 != 1) {
                         SpartaSimulatorLogger.InfoMessage("Generating training center");
-                        generateTrainingCenter();
+                        //generateTrainingCenter();
+                        TrainingCenter trainingCenter = new TrainingCenter();
+                        TrainingCenterManager.getTrainingCenters().add(trainingCenter);
+
+                        for(TrainingCenter trainingCenter1 : TrainingCenterManager.getTrainingCenters()){
+                            System.out.println("second months" + trainingCenter1.getOccupiedSeats());
+                        }
+
+                    }
+                    for(TrainingCenter trainingCenter1 : TrainingCenterManager.getTrainingCenters()){
+                        System.out.println("before" + trainingCenter1.getOccupiedSeats());
                     }
                     traineeAllocator();
-                    TrainingCenterManager.removeLowAttendanceBootcamp();
-                    TrainingCenterManager.removeLowAttendanceTrainingHub();
-                    TrainingCenterManager.removeLowAttendanceTechcentre();
+                    for(TrainingCenter trainingCenter1 : TrainingCenterManager.getTrainingCenters()){
+                        System.out.println("after" + trainingCenter1.getOccupiedSeats());
+                    }
+//                    TrainingCenterManager.removeLowAttendanceBootcamp();
+//                    TrainingCenterManager.removeLowAttendanceTrainingHub();
+//                    TrainingCenterManager.removeLowAttendanceTechcentre();
 
                     String records[] = {String.valueOf(i + 1), String.valueOf(j), String.valueOf(TrainingCenterManager.getOpenCenters()), String.valueOf(TrainingCenterManager.getFullCenters()), String.valueOf(TrainingCenterManager.getNumberTraineesInTraining()), String.valueOf(TraineeManager.getWaitingList().size())};
                     recordPerMonthList.add(records);

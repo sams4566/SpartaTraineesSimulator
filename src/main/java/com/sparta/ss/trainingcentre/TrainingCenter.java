@@ -22,7 +22,7 @@ public class TrainingCenter {
     private boolean isOpen = true;
 
     private boolean maxChecker() {
-        return this.occupiedSeats.size() <= 100;
+        return this.occupiedSeats.size() < 100;
     }
 
     public int getEmptySpaces(){
@@ -58,7 +58,7 @@ public class TrainingCenter {
         }
         while(amountToAllocate > 0 ) {
 
-            if (amountToAllocate + centre.occupiedSeats.size() < 100) {
+            if (centre.occupiedSeats.size() < 99) {
                 centre.occupiedSeats.add(trainees.get(0));
                 trainees.remove(0);
 
