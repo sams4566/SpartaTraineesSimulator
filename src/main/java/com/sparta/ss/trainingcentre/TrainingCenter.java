@@ -34,7 +34,7 @@ public class TrainingCenter {
     }
 
     public static void allocateTrainees() {
-        for (TrainingCenter centre : TrainingCenterManager.trainingCenters) {
+        for (TrainingCenter centre : TrainingCenterManager.getTrainingCenters()) {
             if (TraineeManager.getWaitingList().size() > 0 && centre.isOpen) {
                 putIntoTrainingCentre(TraineeManager.getWaitingList(), centre);
 

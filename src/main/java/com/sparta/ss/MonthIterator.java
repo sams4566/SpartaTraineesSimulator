@@ -36,29 +36,16 @@ public class MonthIterator {
                 for (int j = 1; j <= CheckConfig.checkNumberOfYears(filename) * 12; j++) {
                     if (j % 2 != 1) {
                         SpartaSimulatorLogger.InfoMessage("Generating training center");
-                        //generateTrainingCenter();
+                        generateTrainingCenter();
                         TrainingCenter trainingCenter = new TrainingCenter();
                         TrainingCenterManager.getTrainingCenters().add(trainingCenter);
-
-                        for(TrainingCenter trainingCenter1 : TrainingCenterManager.getTrainingCenters()){
-                            System.out.println("second months" + trainingCenter1.getOccupiedSeats());
-                        }
-
-                    }
-                    for(TrainingCenter trainingCenter1 : TrainingCenterManager.getTrainingCenters()){
-                        System.out.println("before" + trainingCenter1.getOccupiedSeats());
                     }
                     traineeAllocator();
-                    for(TrainingCenter trainingCenter1 : TrainingCenterManager.getTrainingCenters()){
-                        System.out.println("after" + trainingCenter1.getOccupiedSeats());
-                    }
-//                    TrainingCenterManager.removeLowAttendanceBootcamp();
-//                    TrainingCenterManager.removeLowAttendanceTrainingHub();
-//                    TrainingCenterManager.removeLowAttendanceTechcentre();
-
-                    String records[] = {String.valueOf(i + 1), String.valueOf(j), String.valueOf(TrainingCenterManager.getOpenCenters()), String.valueOf(TrainingCenterManager.getFullCenters()), String.valueOf(TrainingCenterManager.getNumberTraineesInTraining()), String.valueOf(TraineeManager.getWaitingList().size())};
+                    TrainingCenterManager.removeLowAttendanceBootcamp();
+                    TrainingCenterManager.removeLowAttendanceTrainingHub();
+                    TrainingCenterManager.removeLowAttendanceTechcentre();
+                    String[] records = getRecords(i, j);
                     recordPerMonthList.add(records);
-
                 }
                 String records[] = {String.valueOf(i + 1), String.valueOf(TrainingCenterManager.getOpenCenters()), String.valueOf(TrainingCenterManager.getFullCenters()), String.valueOf(TrainingCenterManager.getNumberTraineesInTraining()), String.valueOf(TraineeManager.getWaitingList().size())};
                 recordPerYearList.add(records);
@@ -84,9 +71,31 @@ public class MonthIterator {
         }
     }
 
+    private static String[] getRecords(int i, int j) {
+        String records[] = {String.valueOf(i + 1), String.valueOf(j),
+                String.valueOf(TrainingCenterManager.getOpenTrainingHubCount()),
+                String.valueOf(TrainingCenterManager.getOpenTechCenterCount()),
+                String.valueOf(TrainingCenterManager.getOpenBootCampCount()),
+                String.valueOf(TrainingCenterManager.getFullTrainingHubCount()),
+                String.valueOf(TrainingCenterManager.getFullTechCenterCount()),
+                String.valueOf(TrainingCenterManager.getFullBootCampCount()),
+                String.valueOf(TrainingCenterManager.getClosedTrainingHubs()),
+                String.valueOf(TrainingCenterManager.getClosedTechCentres()),
+                String.valueOf(TrainingCenterManager.getClosedBootcampCentres()),
+                String.valueOf(TraineeManager.getTraineeWaitingCount("Java")),
+                String.valueOf(TraineeManager.getTraineeWaitingCount("Business")),
+                String.valueOf(TraineeManager.getTraineeWaitingCount("DevOps")),
+                String.valueOf(TraineeManager.getTraineeWaitingCount("Data")),
+                String.valueOf(TraineeManager.getTraineeWaitingCount("C#")),
+                String.valueOf(TrainingCenterManager.getFullCenters()),
+                String.valueOf(TrainingCenterManager.getNumberTraineesInTraining()),
+                String.valueOf(TraineeManager.getWaitingList().size())};
+        return records;
+    }
+
     private static void generateTrainingCenter() {
         String typeOfTrainingCenter = RandomGenerator.getRandomTrainingCenter();
-        int numberOfCentersGenerated =0;
+        int numberOfCentersGenerated = 0;
         if(typeOfTrainingCenter.equals("TrainingHub")){
             numberOfCentersGenerated = 3;
         }else {
