@@ -9,6 +9,7 @@ import com.sparta.ss.exception.InvalidYearException;
 import com.sparta.ss.logs.SpartaSimulatorLogger;
 import com.sparta.ss.trainee.Trainee;
 import com.sparta.ss.trainee.TraineeManager;
+import com.sparta.ss.trainingcentre.TechCentre;
 import com.sparta.ss.trainingcentre.TrainingCenter;
 import com.sparta.ss.trainingcentre.TrainingCenterManager;
 
@@ -35,7 +36,9 @@ public class MonthIterator {
                         SpartaSimulatorLogger.InfoMessage("Generating training center");
                         for (int t = 0; t < 1; t++) { //change the number based on type of training center
                             TrainingCenter trainingCenter = new TrainingCenter();
+                            TechCentre techcentre = new TechCentre();
                             TrainingCenterManager.getTrainingCenters().add(trainingCenter);
+                            TrainingCenterManager.getTechCenters().add(techcentre);
                         }
                     }
                     traineeAllocator();
@@ -105,3 +108,4 @@ public class MonthIterator {
 
 }
 
+}
