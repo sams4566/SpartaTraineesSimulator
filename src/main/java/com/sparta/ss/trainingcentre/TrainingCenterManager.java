@@ -19,7 +19,7 @@ public class TrainingCenterManager {
         return trainingCenters;
     }
 
-    public static List<TechCentre> getTechCenters() {return techCenters; }
+    //public static List<TechCentre> getTechCenters() {return techCenters; }
 
     public static int getTotCenters() {
         return trainingCenters.size();
