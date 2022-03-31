@@ -37,7 +37,8 @@ public class TrainingCenter {
         SpartaSimulatorLogger.InfoMessage("Allocating trainees");
         for (TrainingCenter centre : TrainingCenterManager.trainingCenters) {
             if (TraineeManager.getWaitingList().size() > 0 && centre.isOpen) {
-               putIntoTrainingCentre(TraineeManager.getWaitingList(), centre);
+                putIntoTrainingCentre(TraineeManager.getWaitingList(), centre);
+
             } else if(TraineeManager.getTrainees().size() > 0 && centre.isOpen){
                 putIntoTrainingCentre(TraineeManager.getTrainees(), centre);
             }

@@ -10,6 +10,10 @@ import com.sparta.ss.logs.SpartaSimulatorLogger;
 import com.sparta.ss.trainee.Trainee;
 import com.sparta.ss.trainee.TraineeManager;
 import com.sparta.ss.trainingcentre.*;
+import com.sparta.ss.trainingcentre.TechCentre;
+import com.sparta.ss.trainingcentre.TrainingCenter;
+import com.sparta.ss.trainingcentre.TrainingCenterManager;
+
 
 
 import java.util.ArrayList;
@@ -33,6 +37,7 @@ public class MonthIterator {
                     if (j % 2 != 1) {
                         SpartaSimulatorLogger.InfoMessage("Generating training center");
                         generateTrainingCenter();
+
                     }
                     traineeAllocator();
 
@@ -129,3 +134,4 @@ public class MonthIterator {
 
 }
 
+}
