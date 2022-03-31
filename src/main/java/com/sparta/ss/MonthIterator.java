@@ -40,7 +40,9 @@ public class MonthIterator {
 
                     }
                     traineeAllocator();
-
+                    TrainingCenterManager.removeLowAttendanceBootcamp();
+                    TrainingCenterManager.removeLowAttendanceTrainingHub();
+                    TrainingCenterManager.removeLowAttendanceTechcentre();
                     String records[] = {String.valueOf(i + 1), String.valueOf(j), String.valueOf(TrainingCenterManager.getOpenCenters()), String.valueOf(TrainingCenterManager.getFullCenters()), String.valueOf(TrainingCenterManager.getNumberTraineesInTraining()), String.valueOf(TraineeManager.getWaitingList().size())};
                     recordPerMonthList.add(records);
 
@@ -131,7 +133,5 @@ public class MonthIterator {
     private int getProperty(String property) {
         return Integer.parseInt(PropertiesLoader.getProperties(ConfigFilename.filename).getProperty(property));
     }
-
-}
 
 }
