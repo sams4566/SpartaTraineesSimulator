@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class BootcampCenter {
 
-    int consLowAttendance = 0;
+    int consLowAttendance = 1;
     private ArrayList<Trainee> occupiedSeats = new ArrayList<>();
     private boolean isOpen = true;
 
