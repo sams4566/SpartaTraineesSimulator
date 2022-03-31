@@ -1,4 +1,4 @@
-package com.sparta.ss;
+package com.sparta.ss.utilities;
 
 import java.util.Random;
 

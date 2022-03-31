@@ -1,6 +1,6 @@
 package com.sparta.ss.trainingcentre;
 
-import com.sparta.ss.RandomGenerator;
+import com.sparta.ss.utilities.RandomGenerator;
 import com.sparta.ss.logs.SpartaSimulatorLogger;
 import com.sparta.ss.trainee.Trainee;
 import com.sparta.ss.trainee.TraineeManager;
@@ -40,7 +40,7 @@ public class BootcampCenter {
     }
 
     public boolean maxChecker() {
-        return this.occupiedSeats.size() <= 500;
+        return this.occupiedSeats.size() < 500;
     }
 
     public int getEmptySpaces(){
@@ -51,33 +51,37 @@ public class BootcampCenter {
         return occupiedSeats.size();
     }
 
+    public ArrayList<Trainee> getOccupiedSeatsList() {
+        return occupiedSeats;
+    }
+
     public static void allocateTrainees() {
-        SpartaSimulatorLogger.InfoMessage("Allocating trainees");
         for (BootcampCenter centre : TrainingCenterManager.getBootcampCenters()) {
             if (TraineeManager.getWaitingList().size() > 0 && centre.isOpen) {
                 putIntoTrainingCentre(TraineeManager.getWaitingList(), centre);
+
             } else if(TraineeManager.getTrainees().size() > 0 && centre.isOpen){
                 putIntoTrainingCentre(TraineeManager.getTrainees(), centre);
             }
         }
         while (TraineeManager.getTrainees().size() != 0){
-            TraineeManager.getWaitingList().add(new Trainee());
+            TraineeManager.getWaitingList().add(TraineeManager.getTrainees().get(0));
             TraineeManager.getTrainees().remove(0);
         }
     }
 
     private static ArrayList<Trainee> putIntoTrainingCentre(ArrayList<Trainee> trainees, BootcampCenter centre) {
         int amountToAllocate = RandomGenerator.getNumberOfTraineesForCenter();
-        while(amountToAllocate >= trainees.size() ) {
-            if (amountToAllocate > trainees.size()) {
-                amountToAllocate = trainees.size();
-            }
-            if (amountToAllocate + centre.occupiedSeats.size() < 100) {
+        if (amountToAllocate > trainees.size()) {
+            amountToAllocate = trainees.size();
+        }
+        while(amountToAllocate > 0 ) {
+            if (centre.occupiedSeats.size() < 499) {
                 centre.occupiedSeats.add(trainees.get(0));
                 TraineeManager.currentlyTrainingTrainees.add(trainees.get(0));
                 trainees.remove(0);
 
-            } else if (amountToAllocate + centre.occupiedSeats.size() == 100) {
+            } else if (centre.occupiedSeats.size() == 499) {
                 centre.occupiedSeats.add(trainees.get(0));
                 TraineeManager.currentlyTrainingTrainees.add(trainees.get(0));
                 centre.isOpen = false;
@@ -85,6 +89,7 @@ public class BootcampCenter {
                 return trainees;
 
             } else {
+
                 while(centre.getEmptySpaces() != 0){
                     centre.occupiedSeats.add(trainees.get(0));
                     TraineeManager.currentlyTrainingTrainees.add(trainees.get(0));
@@ -93,9 +98,9 @@ public class BootcampCenter {
                 centre.isOpen = false;
                 return trainees;
             }
+            amountToAllocate--;
         }
         return trainees;
-
     }
 
     public boolean checkVacancy() {
