@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.sparta.ss.RandomGenerator.*;
+import static com.sparta.ss.utilities.RandomGenerator.*;
 
 public class RandomGeneratorTest {
     @Test

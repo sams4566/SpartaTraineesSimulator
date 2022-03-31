@@ -1,6 +1,6 @@
 package com.sparta.ss.trainee;
 
-import com.sparta.ss.RandomGenerator;
+import com.sparta.ss.utilities.RandomGenerator;
 
 public class Trainee {
     String course;
