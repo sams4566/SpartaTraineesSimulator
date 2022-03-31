@@ -14,6 +14,7 @@ public class SpartaSimulatorLogger {
                 Handler fileHandler = new FileHandler("src/main/java/com/sparta/ss/logs/SpartaSimulatorLog.log",true);
                 logger.addHandler(fileHandler);
                 fileHandler.setFormatter(new CustomFormatter());
+                logger.setUseParentHandlers(false);
 
             } catch (IOException e) {
                 e.printStackTrace();
