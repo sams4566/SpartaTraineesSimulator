@@ -121,12 +121,20 @@ public class MonthIterator {
         SpartaSimulatorLogger.InfoMessage("Updating the waiting list");
         int numberOfTrainees = RandomGenerator.getRandomTrainees();
         addToNewTraineesList(numberOfTrainees);
-        if (TrainingCenterManager.getOpenCenters() == 0) {
+        if (TrainingCenterManager.getOpenTechCentersCount() == 0 && TrainingCenterManager.getOpenBootCampCount() ==0 && TrainingCenterManager.getOpenTrainingHubCount() == 0) {
             addToWaitingList(TraineeManager.getTrainees());
         } else {
-            TrainingCenter.allocateTrainees();
+            if(TrainingCenterManager.getOpenTechCentersCount()!=0) {
+                TechCentre.allocateTrainees();
+            }else {
+                String bootCampOrHub = RandomGenerator.getRandomTrainingCenterTwo();
+                if(bootCampOrHub.equals("TrainingHub")){
+                    TrainingHub.allocateTrainees();
+                }else {
+                    BootcampCenter.allocateTrainees();
+                }
+            }
         }
-
     }
 
 
