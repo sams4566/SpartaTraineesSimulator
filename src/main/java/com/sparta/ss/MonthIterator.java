@@ -105,7 +105,7 @@ public class MonthIterator {
         int numberOfTrainees = RandomGenerator.getRandomTrainees();
         addToNewTraineesList(numberOfTrainees);
         if (TrainingCenterManager.getOpenCenters() == 0) {
-            addToWaitingList(numberOfTrainees);
+            addToWaitingList(TraineeManager.getTrainees());
         } else {
             TrainingCenter.allocateTrainees();
         }
@@ -123,10 +123,10 @@ public class MonthIterator {
 //        return numberOfTrainees;
 
 
-    private static void addToWaitingList(int numberOfTrainees) {
-        while (numberOfTrainees != 0) {
-            TraineeManager.getWaitingList().add(new Trainee());
-            numberOfTrainees--;
+    private static void addToWaitingList(List<Trainee> trainees) {
+        while (trainees.size() != 0) {
+            TraineeManager.getWaitingList().add(trainees.get(0));
+            trainees.remove(0);
         }
     }
 
