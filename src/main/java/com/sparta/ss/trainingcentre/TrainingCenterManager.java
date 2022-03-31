@@ -180,16 +180,9 @@ public class TrainingCenterManager {
         return (int) bootcampCenters.stream().filter(bootcampCenter -> bootcampCenter.checkVacancy()).count();
     }
 
-    public static int getOpenTrainingHubCount(){
-        return (int) trainingHubs.stream().filter(trainingHub -> trainingHub.checkVacancy()).count();
-    }
+
 
     public static int getOpenTechCentersCount(){
         return (int) techCenters.stream().filter(techCentre -> techCentre.checkVacancy()).count();
     }
-
-    public static int getOpenBootCampCount(){
-        return (int) bootcampCenters.stream().filter(bootcampCenter -> bootcampCenter.checkVacancy()).count();
-    }
-
 }
