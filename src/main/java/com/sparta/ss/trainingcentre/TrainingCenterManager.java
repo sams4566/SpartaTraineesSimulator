@@ -15,6 +15,37 @@ public class TrainingCenterManager {
 
     public static List<BootcampCenter> bootcampCenters = new ArrayList<>();
 
+    public static void removeLowAttendanceBootcamp() {
+        int countTrainees = 0;
+        for(BootcampCenter center : bootcampCenters){
+            countTrainees += center.getOccupiedSeats();
+            if (countTrainees < 25 && center.consLowAttendance == 3) {
+                bootcampCenters.remove(center);
+            }else if(countTrainees < 25){
+                center.consLowAttendance ++;
+            }
+        }
+    }
+
+    public static void removeLowAttendanceTrainingHub() {
+        int countTrainees = 0;
+        for(TrainingHub center : trainingHubs){
+            countTrainees += center.getOccupiedSeats();
+            if (countTrainees < 25) {
+                trainingHubs.remove(center);
+            }
+        }
+    }
+
+    public static void removeLowAttendanceTechcentre() {
+        int countTrainees = 0;
+        for(TechCentre center : techCenters){
+            countTrainees += center.getOccupiedSeats();
+            if (countTrainees < 25) {
+                techCenters.remove(center);
+            }
+        }
+    }
 
     public static List<BootcampCenter> getBootcampCenters() {
         return bootcampCenters;
