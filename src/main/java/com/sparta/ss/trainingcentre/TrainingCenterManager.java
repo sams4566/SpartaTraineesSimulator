@@ -17,6 +17,8 @@ public class TrainingCenterManager {
 
     static int closedTrainingHubs = 0;
 
+    static int closedTechCentres = 0;
+
     public static int getClosedTrainingHubs() {
         return closedTrainingHubs;
     }
@@ -29,7 +31,7 @@ public class TrainingCenterManager {
         return closedBootcampCentres;
     }
 
-    static int closedTechCentres = 0;
+
     static int closedBootcampCentres = 0;
 
     public static void removeLowAttendanceBootcamp() {
@@ -39,6 +41,7 @@ public class TrainingCenterManager {
                 if (bootcampCenters.get(i).getOccupiedSeats() < 25 && bootcampCenters.get(i).getConsLowAttendance() == 3) {
                     bootcampCenters.remove(bootcampCenters.get(i));
                     closedBootcampCentres ++;
+                    i --;
                 } else if (bootcampCenters.get(i).getOccupiedSeats() < 25) {
                     bootcampCenters.get(i).increaseConsLowAttendance();
                 }
@@ -53,6 +56,7 @@ public class TrainingCenterManager {
                 if (trainingHubs.get(i).getOccupiedSeats() < 25) {
                     trainingHubs.remove(trainingHubs.get(i));
                     closedTrainingHubs ++;
+                    i --;
                 }
             }
         }
@@ -65,6 +69,7 @@ public class TrainingCenterManager {
                 if (techCenters.get(i).getOccupiedSeats() < 25) {
                     techCenters.remove(techCenters.get(i));
                     closedTechCentres ++;
+                    i --;
                 }
             }
         }
@@ -85,7 +90,7 @@ public class TrainingCenterManager {
     public static List<TechCentre> getTechCenters() {return techCenters; }
 
     public static int getTotCenters() {
-        return trainingCenters.size();
+        return techCenters.size() + bootcampCenters.size() + trainingHubs.size();
     }
 
     public static List<TrainingHub> getTrainingHub() {
@@ -96,63 +101,14 @@ public class TrainingCenterManager {
         return (int) trainingCenters.stream().filter(trainingCenter -> !trainingCenter.checkVacancy()).count();
     }
 
-    public static int getFullBootcampCenters(){
-        return (int) bootcampCenters.stream().filter(bootcampCenter -> !bootcampCenter.checkVacancy()).count();
-    }
-
-    public static int getFullTrainingHubs(){
-        return (int) trainingHubs.stream().filter(trainingHubs -> !trainingHubs.checkVacancy()).count();
-    }
-
-    public static int getFullTechCenters(){
-        return (int) techCenters.stream().filter(techCenters -> !techCenters.checkVacancy()).count();
-    }
-
     public static int getOpenCenters(){
         return (int) trainingCenters.stream().filter(trainingCenter -> trainingCenter.checkVacancy()).count();
-    }
-
-    public static int getOpenBootcampCenters() {
-        return (int) bootcampCenters.stream().filter(bootcampCenter -> bootcampCenter.checkVacancy()).count();
-    }
-
-    public static int getOpenTrainingHubs() {
-        return (int) trainingHubs.stream().filter(trainingHub -> trainingHub.checkVacancy()).count();
-    }
-
-    public static int getOpenTechCenters() {
-        return (int) techCenters.stream().filter(techCentre -> techCentre.checkVacancy()).count();
     }
 
     public static int getNumberTraineesInTraining(){
         int countTrainees = 0;
         for(TrainingCenter trainingCenter : trainingCenters){
             countTrainees += trainingCenter.getOccupiedSeats();
-        }
-        return countTrainees;
-    }
-
-
-    public static int getNumberOfBootcampCenterTrainees(){
-        int countTrainees = 0;
-        for(BootcampCenter bootcampCenter : bootcampCenters){
-            countTrainees += bootcampCenter.getOccupiedSeats();
-        }
-        return countTrainees;
-    }
-
-    public static int getNumberOfTechCenterTrainees(){
-        int countTrainees = 0;
-        for(TechCentre techCentre : techCenters){
-            countTrainees += techCentre.getOccupiedSeats();
-        }
-        return countTrainees;
-    }
-
-    public static int getNumberOfTrainingHubTrainees(){
-        int countTrainees = 0;
-        for(TrainingHub trainingHub : trainingHubs){
-            countTrainees += trainingHub.getOccupiedSeats();
         }
         return countTrainees;
     }
@@ -168,8 +124,6 @@ public class TrainingCenterManager {
     public static int getFullBootCampCount(){
         return (int) bootcampCenters.stream().filter(bootcampCenter -> !bootcampCenter.checkVacancy()).count();
 
-    } public static int getOpenTrainingHubCount(){
-        return (int) trainingHubs.stream().filter(trainingHub -> trainingHub.checkVacancy()).count();
     }
 
     public static int getOpenTechCenterCount(){
@@ -186,10 +140,6 @@ public class TrainingCenterManager {
 
     public static int getOpenTechCentersCount(){
         return (int) techCenters.stream().filter(techCentre -> techCentre.checkVacancy()).count();
-    }
-
-    public static int getOpenBootCampCount(){
-        return (int) bootcampCenters.stream().filter(bootcampCenter -> bootcampCenter.checkVacancy()).count();
     }
 
 }
