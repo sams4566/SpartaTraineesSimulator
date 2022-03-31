@@ -13,6 +13,12 @@ public class BootcampCenter {
     private ArrayList<Trainee> occupiedSeats = new ArrayList<>();
     private boolean isOpen = true;
 
+    public static int getMaxBootcamp() {
+        return maxBootcamp;
+    }
+
+    private static int maxBootcamp = 2;
+
 
     public void setConsLowAttendance(int consLowAttendance) {
         this.consLowAttendance = consLowAttendance;

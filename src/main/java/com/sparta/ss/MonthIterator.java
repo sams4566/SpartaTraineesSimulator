@@ -86,8 +86,12 @@ public class MonthIterator {
                     TrainingCenterManager.getTrainingHub().add(trainingHub);
                     break;
                 case "BootCamp":
-                    BootcampCenter bootcampCenter = new BootcampCenter();
-                    TrainingCenterManager.getBootcampCenters().add(bootcampCenter);
+                    if(TrainingCenterManager.getBootcampCenters().size() == BootcampCenter.getMaxBootcamp()){
+                        generateTrainingCenter();
+                    }else{
+                        BootcampCenter bootcampCenter = new BootcampCenter();
+                        TrainingCenterManager.getBootcampCenters().add(bootcampCenter);
+                    }
                     break;
                 case "TechCenter":
                     TechCentre techCentre = new TechCentre();
