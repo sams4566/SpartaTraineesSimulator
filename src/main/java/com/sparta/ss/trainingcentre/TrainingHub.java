@@ -19,6 +19,10 @@ public class TrainingHub {
         }
     }
 
+    public boolean isLessThan25() {
+        return occupiedSeats.size() <= 25;
+    }
+
     private boolean maxChecker() {
         return this.occupiedSeats.size() <= 100;
     }
@@ -76,7 +80,7 @@ public class TrainingHub {
 
     }
 
-
-
-
+    public boolean checkVacancy() {
+        return maxChecker();
+    }
 }

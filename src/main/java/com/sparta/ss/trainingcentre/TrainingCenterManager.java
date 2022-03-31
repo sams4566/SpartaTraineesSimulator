@@ -93,4 +93,16 @@ public class TrainingCenterManager {
         return trainingCenters.stream().filter(trainingCenter -> !trainingCenter.checkVacancy()).toList();
     }
 
+    public static int getFullTrainingHubCount(){
+        return (int) trainingHubs.stream().filter(trainingHub -> !trainingHub.checkVacancy()).count();
+    }
+
+    public static int getFullTechCenterCount(){
+        return (int) techCenters.stream().filter(techCentre -> !techCentre.checkVacancy()).count();
+    }
+
+    public static int getFullBootCampCount(){
+        return (int) bootcampCenters.stream().filter(bootcampCenter -> !bootcampCenter.checkVacancy()).count();
+    }
+
 }
