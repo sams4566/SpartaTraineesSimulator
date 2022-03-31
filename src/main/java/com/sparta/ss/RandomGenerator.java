@@ -22,4 +22,11 @@ public class RandomGenerator {
         String[] courses = {"Java", "C#","Data","DevOps","Business"};
         return courses[courseSelector];
     }
+
+    public static String getRandomTrainingCenter(){
+        Random random = new Random();
+        int trainingCenterSelector = random.nextInt(3);
+        String[] trainingCenter = {"TrainingHub", "BootCamp","TrainingCenter"};
+        return trainingCenter[trainingCenterSelector];
+    }
 }

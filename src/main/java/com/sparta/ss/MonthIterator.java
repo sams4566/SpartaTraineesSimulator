@@ -9,8 +9,7 @@ import com.sparta.ss.exception.InvalidYearException;
 import com.sparta.ss.logs.SpartaSimulatorLogger;
 import com.sparta.ss.trainee.Trainee;
 import com.sparta.ss.trainee.TraineeManager;
-import com.sparta.ss.trainingcentre.TrainingCenter;
-import com.sparta.ss.trainingcentre.TrainingCenterManager;
+import com.sparta.ss.trainingcentre.*;
 
 
 import java.util.ArrayList;
@@ -33,10 +32,7 @@ public class MonthIterator {
                 for (int j = 1; j <= CheckConfig.checkNumberOfYears(filename) * 12; j++) {
                     if (j % 2 != 1) {
                         SpartaSimulatorLogger.InfoMessage("Generating training center");
-                        for (int t = 0; t < 1; t++) { //change the number based on type of training center
-                            TrainingCenter trainingCenter = new TrainingCenter();
-                            TrainingCenterManager.getTrainingCenters().add(trainingCenter);
-                        }
+                        generateTrainingCenter();
                     }
                     traineeAllocator();
 
@@ -65,6 +61,34 @@ public class MonthIterator {
         } catch (InvalidChoiceOfOutput e) {
             SpartaSimulatorLogger.warningMessage("Invalid choice of output exception thrown");
             System.out.println(e.getMessage());
+        }
+    }
+
+    private static void generateTrainingCenter() {
+        String typeOfTrainingCenter = RandomGenerator.getRandomTrainingCenter();
+        int numberOfCentersGenerated =0;
+        if(typeOfTrainingCenter.equals("TrainingHub")){
+            numberOfCentersGenerated = 3;
+        }else {
+            numberOfCentersGenerated = 1;
+        }
+        for (int t = 0; t < numberOfCentersGenerated; t++) {
+            switch (typeOfTrainingCenter){
+                case "TrainingHub":
+                    TrainingHub trainingHub = new TrainingHub();
+                    TrainingCenterManager.getTrainingHub().add(trainingHub);
+                    break;
+                case "BootCamp":
+                    BootcampCenter bootcampCenter = new BootcampCenter();
+                    TrainingCenterManager.getBootcampCenters().add(bootcampCenter);
+                    break;
+                case "TechCenter":
+                    TechCentre techCentre = new TechCentre();
+                    TrainingCenterManager.getTechCenters().add(techCentre);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
