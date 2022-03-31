@@ -13,7 +13,24 @@ public class ConvertCSVFile {
     private static final String FILENAME = "src/main/resources/output";
     private static final String CSV_EXT = ".csv";
 
-    public static void createCVSFile(List list) {
+    public static void createYearCVSFile(List list) {
+
+        String[] headers = new String[]{"Number of runs", "Open centers", "Full centers", "Trainees currently training", "Trainees on the waiting list"};
+
+        List<String[]> records = new ArrayList<>();
+        records.add(headers);
+
+        for (int i = 0; i < list.size(); i ++) {
+            records.add((String[]) list.get(i));
+        }
+
+        //try (CSVWriter writer = new CSVWriter(new FileWriter("src/main/resources/output.csv"))) {
+
+        createFile(records);
+
+    }
+
+    public static void createMonthCVSFile(List list) {
 
         String[] headers = new String[]{"Number of runs", "Number of Month", "Open centers", "Full centers", "Trainees currently training", "Trainees on the waiting list"};
 

@@ -6,16 +6,14 @@ import com.sparta.ss.trainee.Trainee;
 import com.sparta.ss.trainee.TraineeManager;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class TrainingCenter {
+public class TrainingHub {
 
     public void setOccupiedSeats(int seatsToOccupy) {
         while(seatsToOccupy != 0){
             this.occupiedSeats.add(new Trainee());
             seatsToOccupy--;
         }
-
     }
 
     private ArrayList<Trainee> occupiedSeats = new ArrayList<>();
@@ -34,12 +32,12 @@ public class TrainingCenter {
     }
 
     public static void allocateTrainees() {
-        SpartaSimulatorLogger.InfoMessage("Allocating trainees");
-        for (TrainingCenter centre : TrainingCenterManager.trainingCenters) {
-            if (TraineeManager.getWaitingList().size() > 0 && centre.isOpen) {
-                TraineeManager.setWaitingList(putIntoTrainingCentre(TraineeManager.getWaitingList(), centre));
-            } else if(TraineeManager.getTrainees().size() > 0 && centre.isOpen){
-                TraineeManager.setTrainees(putIntoTrainingCentre(TraineeManager.getTrainees(), centre));
+        SpartaSimulatorLogger.InfoMessage("Allocating trainees to Training Hub");
+        for (TrainingHub hub : TrainingCenterManager.trainingHubs) {
+            if (TraineeManager.getWaitingList().size() > 0 && hub.isOpen) {
+                putIntoTrainingCentre(TraineeManager.getWaitingList(), hub);
+            } else if(TraineeManager.getTrainees().size() > 0 && hub.isOpen){
+                putIntoTrainingCentre(TraineeManager.getTrainees(), hub);
             }
         }
         while (TraineeManager.getTrainees().size() != 0){
@@ -49,27 +47,30 @@ public class TrainingCenter {
 
     }
 
-    private static ArrayList<Trainee> putIntoTrainingCentre(ArrayList<Trainee> trainees, TrainingCenter centre) {
+    private static ArrayList<Trainee> putIntoTrainingCentre(ArrayList<Trainee> trainees, TrainingHub hub) {
         int amountToAllocate = RandomGenerator.getNumberOfTraineesForCenter();
-        while(amountToAllocate > 0 ) {
+        while(amountToAllocate >= trainees.size() ) {
             if (amountToAllocate > trainees.size()) {
                 amountToAllocate = trainees.size();
             }
-            if (amountToAllocate + centre.occupiedSeats.size() < 100) {
-                centre.occupiedSeats.add(trainees.get(0));
+            if (amountToAllocate + hub.occupiedSeats.size() < 100) {
+                hub.occupiedSeats.add(trainees.get(0));
                 trainees.remove(0);
 
-            } else if (centre.occupiedSeats.size() == 99) {
-                centre.occupiedSeats.add(trainees.get(0));
-                centre.isOpen = false;
+            } else if (amountToAllocate + hub.occupiedSeats.size() == 100) {
+                hub.occupiedSeats.add(trainees.get(0));
+                hub.isOpen = false;
                 trainees.remove(0);
                 return trainees;
 
             } else {
-                centre.isOpen = false;
+                while(hub.getEmptySpaces() != 0){
+                    hub.occupiedSeats.add(trainees.get(0));
+                    trainees.remove(0);
+                }
+                hub.isOpen = false;
                 return trainees;
             }
-            amountToAllocate--;
         }
         return trainees;
 
@@ -77,10 +78,5 @@ public class TrainingCenter {
 
 
 
-    public boolean checkVacancy() {
-        return maxChecker();
-    }
 
 }
-
-
