@@ -4,9 +4,22 @@ import com.sparta.ss.utilities.RandomGenerator;
 
 public class Trainee {
     String course;
+    int trainingTime;
+
+
+    public int getTrainingTime() {
+        return trainingTime;
+    }
+
+    public void setTrainingTime(int trainingTime) {
+        this.trainingTime = trainingTime;
+    }
+
 
     public Trainee() {
+
         this.course = RandomGenerator.getRandomCourse();
+        this.trainingTime = 0;
     }
 
     public String getCourse() {

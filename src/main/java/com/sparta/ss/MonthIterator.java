@@ -7,6 +7,7 @@ import com.sparta.ss.exception.InvalidRunNumberException;
 import com.sparta.ss.exception.InvalidYearException;
 import com.sparta.ss.logs.SpartaSimulatorLogger;
 import com.sparta.ss.trainee.Trainee;
+import com.sparta.ss.trainee.TraineeBench;
 import com.sparta.ss.trainee.TraineeManager;
 import com.sparta.ss.trainingcentre.*;
 import com.sparta.ss.trainingcentre.TechCentre;
@@ -35,9 +36,13 @@ public class MonthIterator {
                 TraineeManager.removeAllTraineesFromWaitingList();
                 SpartaSimulatorLogger.InfoMessage("Getting number of years");
                 for (int j = 1; j <= CheckConfig.checkNumberOfYears(filename) * 12; j++) {
+
                     TrainingCenterManager.removeLowAttendanceBootcamp();
                     TrainingCenterManager.removeLowAttendanceTrainingHub();
                     TrainingCenterManager.removeLowAttendanceTechcentre();
+
+                    TraineeBench.gettingTraineesToBench();
+
                     if (j % 2 != 1) {
                         SpartaSimulatorLogger.InfoMessage("Generating training center");
                         generateTrainingCenter();
@@ -101,8 +106,38 @@ public class MonthIterator {
                     default:
                         break;
                 }
-            }
-        }
+
+
+//     private static void generateTrainingCenter() {
+//         String typeOfTrainingCenter = RandomGenerator.getRandomTrainingCenter();
+//         int numberOfCentersGenerated = 0;
+//         if(typeOfTrainingCenter.equals("TrainingHub")){
+//             numberOfCentersGenerated = 3;
+//         }else {
+//             numberOfCentersGenerated = 1;
+//         }
+//         for (int t = 0; t < numberOfCentersGenerated; t++) {
+//             switch (typeOfTrainingCenter){
+//                 case "TrainingHub":
+//                     TrainingHub trainingHub = new TrainingHub();
+//                     TrainingCenterManager.getTrainingHub().add(trainingHub);
+//                     break;
+//                 case "BootCamp":
+//                     if(TrainingCenterManager.getBootcampCenters().size() == BootcampCenter.getMaxBootcamp()){
+//                         generateTrainingCenter();
+//                     }else{
+//                         BootcampCenter bootcampCenter = new BootcampCenter();
+//                         TrainingCenterManager.getBootcampCenters().add(bootcampCenter);
+//                     }
+//                     break;
+//                 case "TechCenter":
+//                     TechCentre techCentre = new TechCentre();
+//                     TrainingCenterManager.getTechCenters().add(techCentre);
+//                     break;
+//                 default:
+//                     break;
+//             }
+//         }
 
 
         public static void traineeAllocator () {
