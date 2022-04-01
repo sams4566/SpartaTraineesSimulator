@@ -77,35 +77,35 @@ public class MonthIterator {
         }
     }
 
-        private static void generateTrainingCenter () {
-            String typeOfTrainingCenter = RandomGenerator.getRandomTrainingCenter();
-            int numberOfCentersGenerated = 0;
-            if (typeOfTrainingCenter.equals("TrainingHub")) {
-                numberOfCentersGenerated = 3;
-            } else {
-                numberOfCentersGenerated = 1;
+    private static void generateTrainingCenter () {
+        String typeOfTrainingCenter = RandomGenerator.getRandomTrainingCenter();
+        int numberOfCentersGenerated = 0;
+        if (typeOfTrainingCenter.equals("TrainingHub")) {
+            numberOfCentersGenerated = 3;
+        } else {
+            numberOfCentersGenerated = 1;
+        }
+        for (int t = 0; t < numberOfCentersGenerated; t++) {
+            switch (typeOfTrainingCenter) {
+                case "TrainingHub":
+                    TrainingHub trainingHub = new TrainingHub();
+                    TrainingCenterManager.getTrainingHub().add(trainingHub);
+                    break;
+                case "BootCamp":
+                    if (TrainingCenterManager.getBootcampCenters().size() == BootcampCenter.getMaxBootcamp()) {
+                        generateTrainingCenter();
+                    } else {
+                        BootcampCenter bootcampCenter = new BootcampCenter();
+                        TrainingCenterManager.getBootcampCenters().add(bootcampCenter);
+                    }
+                    break;
+                case "TechCenter":
+                    TechCentre techCentre = new TechCentre();
+                    TrainingCenterManager.getTechCenters().add(techCentre);
+                    break;
+                default:
+                    break;
             }
-            for (int t = 0; t < numberOfCentersGenerated; t++) {
-                switch (typeOfTrainingCenter) {
-                    case "TrainingHub":
-                        TrainingHub trainingHub = new TrainingHub();
-                        TrainingCenterManager.getTrainingHub().add(trainingHub);
-                        break;
-                    case "BootCamp":
-                        if (TrainingCenterManager.getBootcampCenters().size() == BootcampCenter.getMaxBootcamp()) {
-                            generateTrainingCenter();
-                        } else {
-                            BootcampCenter bootcampCenter = new BootcampCenter();
-                            TrainingCenterManager.getBootcampCenters().add(bootcampCenter);
-                        }
-                        break;
-                    case "TechCenter":
-                        TechCentre techCentre = new TechCentre();
-                        TrainingCenterManager.getTechCenters().add(techCentre);
-                        break;
-                    default:
-                        break;
-                }
 
 
 //     private static void generateTrainingCenter() {
@@ -140,51 +140,50 @@ public class MonthIterator {
 //         }
 
 
-        public static void traineeAllocator () {
-            SpartaSimulatorLogger.InfoMessage("Updating the waiting list");
-            int numberOfTrainees = RandomGenerator.getRandomTrainees();
-            addToNewTraineesList(numberOfTrainees);
-            int count = 0;
-            if (TrainingCenterManager.getOpenTechCentersCount() == 0 && TrainingCenterManager.getOpenBootCampCount() == 0 && TrainingCenterManager.getOpenTrainingHubCount() == 0) {
-                addToWaitingList(TraineeManager.getTrainees());
-            } else {
-                if (TrainingCenterManager.getOpenTechCentersCount() != 0) {
-                    count = TechCentre.allocateTrainees().size();
-                }
-                if(count != 0 || TrainingCenterManager.getOpenTechCentersCount() == 0) {
-                    String bootCampOrHub = RandomGenerator.getRandomTrainingCenterTwo();
-                    if (bootCampOrHub.equals("TrainingHub")) {
-                        TrainingHub.allocateTrainees();
-                    } else {
-                        BootcampCenter.allocateTrainees();
+            public static void traineeAllocator () {
+                SpartaSimulatorLogger.InfoMessage("Updating the waiting list");
+                int numberOfTrainees = RandomGenerator.getRandomTrainees();
+                addToNewTraineesList(numberOfTrainees);
+                int count = 0;
+                if (TrainingCenterManager.getOpenTechCentersCount() == 0 && TrainingCenterManager.getOpenBootCampCount() == 0 && TrainingCenterManager.getOpenTrainingHubCount() == 0) {
+                    addToWaitingList(TraineeManager.getTrainees());
+                } else {
+                    if (TrainingCenterManager.getOpenTechCentersCount() != 0) {
+                        count = TechCentre.allocateTrainees().size();
+                    }
+                    if (count != 0 || TrainingCenterManager.getOpenTechCentersCount() == 0) {
+                        String bootCampOrHub = RandomGenerator.getRandomTrainingCenterTwo();
+                        if (bootCampOrHub.equals("TrainingHub")) {
+                            TrainingHub.allocateTrainees();
+                        } else {
+                            BootcampCenter.allocateTrainees();
+                        }
                     }
                 }
             }
-        }
 
 
-        private static void addToNewTraineesList ( int numberOfTrainees){
-            while (numberOfTrainees != 0) {
-                TraineeManager.getTrainees().add(new Trainee());
-                numberOfTrainees--;
+            private static void addToNewTraineesList ( int numberOfTrainees){
+                while (numberOfTrainees != 0) {
+                    TraineeManager.getTrainees().add(new Trainee());
+                    numberOfTrainees--;
+                }
+
             }
-
-        }
 //        return numberOfTrainees;
 
 
-        private static void addToWaitingList (List < Trainee > trainees) {
-            while (trainees.size() != 0) {
-                TraineeManager.getWaitingList().add(trainees.get(0));
-                trainees.remove(0);
+            private static void addToWaitingList (List < Trainee > trainees) {
+                while (trainees.size() != 0) {
+                    TraineeManager.getWaitingList().add(trainees.get(0));
+                    trainees.remove(0);
+                }
             }
-        }
 
-        private int getProperty (String property){
-            return Integer.parseInt(PropertiesLoader.getProperties(ConfigFilename.filename).getProperty(property));
-        }
+            private int getProperty (String property){
+                return Integer.parseInt(PropertiesLoader.getProperties(ConfigFilename.filename).getProperty(property));
+            }
 
+        }
     }
-
-}
-
+    }
