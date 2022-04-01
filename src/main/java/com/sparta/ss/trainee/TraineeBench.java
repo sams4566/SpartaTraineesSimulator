@@ -8,14 +8,21 @@ public class TraineeBench {
 
     public static void gettingTraineesToBench() {
         int count = 0;
-        while (count<TraineeManager.currentlyTrainingTrainees.size())
-            if(TraineeManager.currentlyTrainingTrainees.get(count).getTrainingTime() == 11){
+        while (count < TraineeManager.currentlyTrainingTrainees.size()) {
+            if (TraineeManager.currentlyTrainingTrainees.get(count).getTrainingTime() == 11) {
                 benchTrainees.add(TraineeManager.currentlyTrainingTrainees.get(count));
                 TraineeManager.currentlyTrainingTrainees.remove(count);
-            }else {
+            } else {
                 TraineeManager.currentlyTrainingTrainees.get(count).setTrainingTime(TraineeManager.currentlyTrainingTrainees.get(count).getTrainingTime() + 1);
                 count++;
             }
         }
+
     }
+    public static void resetBenchCount(){
+        benchTrainees.clear();
+    }
+
+}
+
 

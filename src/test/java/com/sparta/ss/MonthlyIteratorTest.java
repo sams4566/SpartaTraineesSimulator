@@ -28,21 +28,5 @@ public class MonthlyIteratorTest {
         assertEquals(6, TrainingCenterManager.getTotCenters());
     }
 
-    @Test
-    @DisplayName("check centres are filled")
-    void checkCentresAreFilled() {
-        assertEquals(true,TrainingCenterManager.getFullCenters() >= 1);
-    }
-//
-//    @Test
-//    @DisplayName("check waiting list is not a negative number")
-//    void checkWaitingListIsNotANegativeNumber() {
-//        int i = 0;
-//        while(i<250){
-//            MonthIterator.monthIterator(ConfigFilename.filename);
-//            Assertions.assertEquals(true,MonthIterator.getWaitingList()>=0);
-//            i++;
-//        }
-//
-//    }
+
 }

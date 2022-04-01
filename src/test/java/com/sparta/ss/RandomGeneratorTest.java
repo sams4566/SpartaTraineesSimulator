@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static com.sparta.ss.utilities.RandomGenerator.*;
 
 public class RandomGeneratorTest {
@@ -12,7 +15,6 @@ public class RandomGeneratorTest {
     void getRandomTraineesReturnsValueBetween50And100() {
         for (int i = 0; i < 19 ; i++){
             int value = getRandomTrainees();
-            System.out.println(value);
             Assertions.assertTrue(value <= 100 && value >= 50);
         }
     }
@@ -22,18 +24,17 @@ public class RandomGeneratorTest {
     void getNumberOfTraineesForCenterReturnsValueBetween50And100() {
         for (int i = 0; i < 19; i++) {
             int value = getNumberOfTraineesForCenter();
-            System.out.println(value);
             Assertions.assertTrue(value <= 50 && value >= 0);
         }
     }
 
-//    @Test
-//    @DisplayName("getRandomCourse returns 5 job streams at random")
-//    void getRandomCourseReturns5JobStreamsAtRandom() {
-//        for (int i = 0; i < 19; i++) {
-//            String value = getRandomCourse();
-//            System.out.println(value);
-//            Assertions.assertEquals("Java" || "C#" || "Data" || "DevOps" || "Business", getRandomCourse());
-//        }
-//    }
+    @Test
+    @DisplayName("getRandomCourse returns 5 job streams at random")
+    void getRandomCourseReturns5JobStreamsAtRandom() {
+        for (int i = 0; i < 19; i++) {
+            String value = getRandomCourse();
+            ArrayList<String> courses = new ArrayList<>(Arrays.asList("Java", "C#", "Data", "DevOps", "Business"));
+            Assertions.assertEquals(true, courses.contains(value));
+        }
+    }
 }

@@ -22,5 +22,9 @@ public class TraineeManager {
     public static int getTraineeWaitingCount(String course){
         return (int) waitingList.stream().filter(trainee -> trainee.getCourse().equals(course)).count();
     }
+
+    public static void resetCurrentlyTrainingTrainees(){
+        currentlyTrainingTrainees.clear();
+    }
 }
 

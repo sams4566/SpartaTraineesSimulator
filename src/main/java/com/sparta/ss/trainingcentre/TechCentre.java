@@ -25,14 +25,8 @@ public class TechCentre {
         this.course = RandomGenerator.getRandomCourse();
     }
 
-    public boolean isLessThan25() { return occupiedSeats.size() <= 25; }
-
     private boolean maxChecker() {
         return this.occupiedSeats.size() < maxTrainee;
-    }
-
-    public int getEmptySpaces(){
-        return maxTrainee - occupiedSeats.size();
     }
 
     public int getOccupiedSeats() {
@@ -56,53 +50,31 @@ public class TechCentre {
     }
 
     private static ArrayList<Trainee> putIntoTrainingCentre(ArrayList<Trainee> trainees, TechCentre centre) {
-        int amountToAllocate = RandomGenerator.getNumberOfTraineesForCenter();
-
-//         if (amountToAllocate > trainees.size()) {
-//             amountToAllocate = trainees.size();
-//         }
-//         for(int i = 0; i < trainees.size(); i++ ){
-//             if(trainees.get(i).getCourse().equals(centre.course)) {
-//                 if (centre.occupiedSeats.size() < 199) {
-//                     centre.occupiedSeats.add(trainees.get(i));
-//                     trainees.remove(0);
-
-//                 } else if (centre.occupiedSeats.size() == 199) {
-//                     centre.occupiedSeats.add(trainees.get(i));
-
-        while(amountToAllocate >= trainees.size() ) {
-            if (amountToAllocate > trainees.size()) {
-                amountToAllocate = trainees.size();
-            }
-            if(trainees.get(0).getCourse().equals(centre.course)) {
-                if (amountToAllocate + centre.occupiedSeats.size() < maxTrainee) {
-                    centre.occupiedSeats.add(trainees.get(0));
-                    TraineeManager.currentlyTrainingTrainees.add(trainees.get(0));
-                    trainees.remove(0);
-
-                } else if (amountToAllocate + centre.occupiedSeats.size() == maxTrainee) {
-                    centre.occupiedSeats.add(trainees.get(0));
-                    TraineeManager.currentlyTrainingTrainees.add(trainees.get(0));
-
-                    centre.isOpen = false;
-                    trainees.remove(0);
-                    return trainees;
-
-                } else {
-
-//                     while (centre.getEmptySpaces() != 0) {
-//                         centre.occupiedSeats.add(trainees.get(0));
-//                         TraineeManager.currentlyTrainingTrainees.add(trainees.get(0));
-//                         trainees.remove(0);
-//                     }
-
-                    centre.isOpen = false;
-                    return trainees;
-                }
-                amountToAllocate--;
-            }
-
-        }
+         int amountToAllocate = RandomGenerator.getNumberOfTraineesForCenter();
+         int count = 0;
+         if (amountToAllocate > trainees.size()) {
+             amountToAllocate = trainees.size();
+         }
+         while(count < trainees.size() && amountToAllocate != 0) {
+             if (trainees.get(count).getCourse().equals(centre.course)) {
+                 if (centre.occupiedSeats.size() < 199) {
+                     TraineeManager.currentlyTrainingTrainees.add(trainees.get(count));
+                     centre.occupiedSeats.add(trainees.get(count));
+                     trainees.remove(count);
+                     amountToAllocate--;
+                 } else if (centre.occupiedSeats.size() == 199) {
+                     centre.occupiedSeats.add(trainees.get(count));
+                     TraineeManager.currentlyTrainingTrainees.add(trainees.get(0));
+                     centre.isOpen = false;
+                     trainees.remove(0);
+                     return trainees;
+                 } else {
+                     centre.isOpen = false;
+                     return trainees;
+                 }
+             }
+             count++;
+         }
         return trainees;
     }
 

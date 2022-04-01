@@ -24,10 +24,6 @@ public class BootcampCenter {
         this.consLowAttendance ++;
     }
 
-    public boolean isLessThan25() {
-        return occupiedSeats.size() <= 25;
-    }
-
     public void setOccupiedSeats(int seatsToOccupy) {
         while(seatsToOccupy != 0){
             this.occupiedSeats.add(new Trainee());

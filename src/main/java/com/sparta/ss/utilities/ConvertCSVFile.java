@@ -34,7 +34,8 @@ public class ConvertCSVFile {
                 "Trainees currently waiting that studied C#",
                 "Trainees currently waiting that studied Data",
                 "Trainees currently waiting that studied DevOps",
-                "Trainees currently waiting that studied Business"};
+                "Trainees currently waiting that studied Business",
+                "Trainees currently on the bench"};
 
         List<String[]> records = new ArrayList<>();
         records.add(headers);
@@ -70,7 +71,8 @@ public class ConvertCSVFile {
                 "Trainees currently waiting that studied C#",
                 "Trainees currently waiting that studied Data",
                 "Trainees currently waiting that studied DevOps",
-                "Trainees currently waiting that studied Business"};
+                "Trainees currently waiting that studied Business",
+                "Trainees currently on the bench"};
 
         List<String[]> records = new ArrayList<>();
         records.add(headers);
@@ -78,8 +80,6 @@ public class ConvertCSVFile {
         for (int i = 0; i < list.size(); i ++) {
             records.add((String[]) list.get(i));
         }
-
-        //try (CSVWriter writer = new CSVWriter(new FileWriter("src/main/resources/output.csv"))) {
 
         createFile(records);
 
