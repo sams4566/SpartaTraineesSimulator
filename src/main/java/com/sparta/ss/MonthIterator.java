@@ -116,44 +116,49 @@ public class MonthIterator {
 
 
 
-        public static void traineeAllocator () {
-            SpartaSimulatorLogger.InfoMessage("Updating the waiting list");
-            int numberOfTrainees = RandomGenerator.getRandomTrainees();
-            addToNewTraineesList(numberOfTrainees);
-            int count = 0;
-            if (TrainingCenterManager.getOpenTechCentersCount() == 0 && TrainingCenterManager.getOpenBootCampCount() == 0 && TrainingCenterManager.getOpenTrainingHubCount() == 0) {
-                addToWaitingList(TraineeManager.getTrainees());
-            } else {
-                if (TrainingCenterManager.getOpenTechCentersCount() != 0) {
-                    count = TechCentre.allocateTrainees().size();
-                }
-                if(count != 0 || TrainingCenterManager.getOpenTechCentersCount() == 0) {
-                    String bootCampOrHub = RandomGenerator.getRandomTrainingCenterTwo();
-                    if (bootCampOrHub.equals("TrainingHub")) {
-                        TrainingHub.allocateTrainees();
-                    } else {
-                        BootcampCenter.allocateTrainees();
+
+            public static void traineeAllocator () {
+                SpartaSimulatorLogger.InfoMessage("Updating the waiting list");
+                int numberOfTrainees = RandomGenerator.getRandomTrainees();
+                addToNewTraineesList(numberOfTrainees);
+                int count = 0;
+                if (TrainingCenterManager.getOpenTechCentersCount() == 0 && TrainingCenterManager.getOpenBootCampCount() == 0 && TrainingCenterManager.getOpenTrainingHubCount() == 0) {
+                    addToWaitingList(TraineeManager.getTrainees());
+                } else {
+                    if (TrainingCenterManager.getOpenTechCentersCount() != 0) {
+                        count = TechCentre.allocateTrainees().size();
+                    }
+                    if (count != 0 || TrainingCenterManager.getOpenTechCentersCount() == 0) {
+                        String bootCampOrHub = RandomGenerator.getRandomTrainingCenterTwo();
+                        if (bootCampOrHub.equals("TrainingHub")) {
+                            TrainingHub.allocateTrainees();
+                        } else {
+                            BootcampCenter.allocateTrainees();
+                        }
                     }
                 }
             }
-        }
 
 
-        private static void addToNewTraineesList ( int numberOfTrainees){
-            while (numberOfTrainees != 0) {
-                TraineeManager.getTrainees().add(new Trainee());
-                numberOfTrainees--;
+            private static void addToNewTraineesList ( int numberOfTrainees){
+                while (numberOfTrainees != 0) {
+                    TraineeManager.getTrainees().add(new Trainee());
+                    numberOfTrainees--;
+                }
+
+
             }
 
-        }
 
-        private static void addToWaitingList (List < Trainee > trainees) {
-            while (trainees.size() != 0) {
-                TraineeManager.getWaitingList().add(trainees.get(0));
-                trainees.remove(0);
+            private static void addToWaitingList (List < Trainee > trainees) {
+                while (trainees.size() != 0) {
+                    TraineeManager.getWaitingList().add(trainees.get(0));
+                    trainees.remove(0);
+                }
             }
-        }
 
+            private int getProperty (String property){
+                return Integer.parseInt(PropertiesLoader.getProperties(ConfigFilename.filename).getProperty(property));
+            }
     }
-
 
