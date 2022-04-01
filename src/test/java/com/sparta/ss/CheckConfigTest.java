@@ -1,5 +1,6 @@
 package com.sparta.ss;
 
+import com.sparta.ss.config.CheckConfig;
 import com.sparta.ss.config.ConfigFilename;
 import com.sparta.ss.exception.InvalidChoiceOfOutput;
 import com.sparta.ss.exception.InvalidRunNumberException;

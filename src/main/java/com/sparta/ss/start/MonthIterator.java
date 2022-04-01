@@ -1,5 +1,6 @@
-package com.sparta.ss;
+package com.sparta.ss.start;
 
+import com.sparta.ss.config.CheckConfig;
 import com.sparta.ss.config.ConfigFilename;
 import com.sparta.ss.config.PropertiesLoader;
 import com.sparta.ss.exception.InvalidChoiceOfOutput;

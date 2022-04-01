@@ -1,4 +1,4 @@
-package com.sparta.ss;
+package com.sparta.ss.config;
 
 import com.sparta.ss.config.PropertiesLoader;
 import com.sparta.ss.exception.InvalidChoiceOfOutput;

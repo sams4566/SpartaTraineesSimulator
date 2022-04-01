@@ -1,6 +1,7 @@
 package com.sparta.ss;
 
 import com.sparta.ss.config.ConfigFilename;
+import com.sparta.ss.start.MonthIterator;
 import com.sparta.ss.trainee.TraineeManager;
 import com.sparta.ss.trainingcentre.TrainingCenterManager;
 import org.junit.jupiter.api.BeforeAll;
