@@ -1,12 +1,10 @@
 package com.sparta.ss.trainingcentre;
 
-import com.sparta.ss.RandomGenerator;
-import com.sparta.ss.logs.SpartaSimulatorLogger;
+import com.sparta.ss.utilities.RandomGenerator;
 import com.sparta.ss.trainee.Trainee;
 import com.sparta.ss.trainee.TraineeManager;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TrainingCenter {
 

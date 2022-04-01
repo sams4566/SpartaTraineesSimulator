@@ -113,65 +113,92 @@ public class TrainingCenterManagerTester {
     }
 
     @Test
-    @DisplayName("return number of open bootcamp centers")
-    void returnListOfOpenBootcampCenters() {
-        int countOpenCenters = trainingCenterManager.getOpenBootcampCenters();
-        Assertions.assertEquals(3, countOpenCenters);
-    }
-
-    @Test
     @DisplayName("return number of full bootcamp centers")
     void returnListOfFullBootcampCenters() {
-        int countFullCenters = trainingCenterManager.getFullBootcampCenters();
+        int countFullCenters = trainingCenterManager.getFullBootCampCount();
         Assertions.assertEquals(1, countFullCenters);
-    }
-
-    @Test
-    @DisplayName("return number of trainees in bootcamp centers")
-    void returnNumberOfBootcampCentersTrainees() {
-        int countTrainingTrainees = trainingCenterManager.getNumberOfBootcampCenterTrainees();
-        Assertions.assertEquals(620, countTrainingTrainees);
-    }
-
-    @Test
-    @DisplayName("return number of open tech centers")
-    void returnListOfOpenTechCenters() {
-        int countOpenCenters = trainingCenterManager.getOpenTechCenters();
-        Assertions.assertEquals(3, countOpenCenters);
-    }
-
-    @Test
-    @DisplayName("return number of full tech centers")
-    void returnListOfFullTechCenters() {
-        int countFullCenters = trainingCenterManager.getFullTechCenters();
-        Assertions.assertEquals(1, countFullCenters);
-    }
-
-    @Test
-    @DisplayName("return number of trainees in tech center")
-    void returnNumberOfTechCenterTrainees() {
-        int countTrainingTrainees = trainingCenterManager.getNumberOfTechCenterTrainees();
-        Assertions.assertEquals(220, countTrainingTrainees);
-    }
-
-    @Test
-    @DisplayName("return number of open training hub")
-    void returnListOfOpenTrainingHub() {
-        int countOpenCenters = trainingCenterManager.getOpenTrainingHubs();
-        Assertions.assertEquals(3, countOpenCenters);
     }
 
     @Test
     @DisplayName("return number of full training hub")
     void returnListOfFullTrainingHub() {
-        int countFullCenters = trainingCenterManager.getFullTrainingHubs();
+        int countFullCenters = trainingCenterManager.getFullTrainingHubCount();
         Assertions.assertEquals(1, countFullCenters);
     }
 
     @Test
-    @DisplayName("return number of trainees in training hub")
-    void returnNumberOfTrainingHubTrainees() {
-        int countTrainingTrainees = trainingCenterManager.getNumberOfTrainingHubTrainees();
-        Assertions.assertEquals(220, countTrainingTrainees);
+    @DisplayName("return number of full tech centers")
+    void returnListOfFullTechCenters() {
+        int countFullCenters = trainingCenterManager.getFullTechCenterCount();
+        Assertions.assertEquals(1, countFullCenters);
     }
+
+    //@Test
+    //@DisplayName("return number of open bootcamp centers")
+    //void returnListOfOpenBootcampCenters() {
+    //    int countOpenCenters = trainingCenterManager.getOpenBootCampCount();
+    //    Assertions.assertEquals(3, countOpenCenters);
+    //}
+
+    @Test
+    @DisplayName("return number of open training hub")
+    void returnListOfOpenTrainingHub() {
+        int countOpenCenters = trainingCenterManager.getOpenTrainingHubCount();
+        Assertions.assertEquals(3, countOpenCenters);
+    }
+
+    @Test
+    @DisplayName("return number of open tech centers")
+    void returnListOfOpenTechCenters() {
+        int countOpenCenters = trainingCenterManager.getOpenTechCenterCount();
+        Assertions.assertEquals(3, countOpenCenters);
+    }
+
+    @Test
+    @DisplayName("return number of close bootcamp centers")
+    void returnListOfCloseBootcampCentersAfter1Month() {
+        for(int i = 0; i < 1; i ++) {
+            trainingCenterManager.removeLowAttendanceBootcamp();
+        }
+        trainingCenterManager.removeLowAttendanceBootcamp();
+        int countCloseCenters = trainingCenterManager.getClosedBootcampCentres();
+        Assertions.assertEquals(0, countCloseCenters);
+    }
+
+    @Test
+    @DisplayName("return number of close bootcamp centers")
+    void returnListOfCloseBootcampCentersAfter2Month() {
+        for(int i = 0; i < 2; i ++) {
+            trainingCenterManager.removeLowAttendanceBootcamp();
+        }
+        int countCloseCenters = trainingCenterManager.getClosedBootcampCentres();
+        Assertions.assertEquals(0, countCloseCenters);
+    }
+
+    @Test
+    @DisplayName("return number of close bootcamp centers")
+    void returnListOfCloseBootcampCentersAfter3Month() {
+        for(int i = 0; i < 3; i ++) {
+            trainingCenterManager.removeLowAttendanceBootcamp();
+        }
+        int countCloseCenters = trainingCenterManager.getClosedBootcampCentres();
+        Assertions.assertEquals(3, countCloseCenters);
+    }
+//
+    @Test
+    @DisplayName("return number of close training hub")
+    void returnListOfCloseTrainingHub() {
+        trainingCenterManager.removeLowAttendanceTrainingHub();
+        int countCloseCenters = trainingCenterManager.getClosedTrainingHubs();
+        Assertions.assertEquals(3, countCloseCenters);
+    }
+
+    @Test
+    @DisplayName("return number of close tech centers")
+    void returnListOfCloseTechCenters() {
+        trainingCenterManager.removeLowAttendanceTechcentre();
+        int countCloseCenters = trainingCenterManager.getClosedTechCentres();
+        Assertions.assertEquals(3, countCloseCenters);
+    }
+
 }
