@@ -11,15 +11,15 @@ public class CheckConfig {
 
     public static int checkNumberOfYears(String filename) throws InvalidYearException {
         int year = 0;
-            try {
-                year = Integer.parseInt(propertiesLoader.getProperties(filename).getProperty("amountOfYears"));
-                if (year <= 0) {
-                    throw new InvalidYearException();
-                }
-            }catch (Exception e){
+        try {
+            year = Integer.parseInt(propertiesLoader.getProperties(filename).getProperty("amountOfYears"));
+            if (year <= 0) {
                 throw new InvalidYearException();
+            }
+        }catch (Exception e){
+            throw new InvalidYearException();
         }
-            return year;
+        return year;
     }
 
 

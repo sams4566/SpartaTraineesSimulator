@@ -1,6 +1,6 @@
 package com.sparta.ss.view;
 
-import com.sparta.ss.PropertiesLoader;
+import com.sparta.ss.config.PropertiesLoader;
 
 public class PrintOut {
 
