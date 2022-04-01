@@ -11,7 +11,7 @@ import com.sparta.ss.trainee.TraineeBench;
 import com.sparta.ss.trainee.TraineeManager;
 import com.sparta.ss.trainingcentre.*;
 import com.sparta.ss.trainingcentre.TechCentre;
-import com.sparta.ss.trainingcentre.TrainingCenter;
+
 import com.sparta.ss.trainingcentre.TrainingCenterManager;
 import com.sparta.ss.utilities.CSVFormatter;
 import com.sparta.ss.utilities.ConvertCSVFile;
@@ -31,30 +31,19 @@ public class MonthIterator {
         try {
             SpartaSimulatorLogger.InfoMessage("Getting number of runs");
             for (int i = 0; i < CheckConfig.checkNumberOfRuns(filename); i++) {
-                TraineeManager.getTrainees().clear();
-                TrainingCenterManager.removeAllTrainingCenter();
-                TraineeManager.removeAllTraineesFromWaitingList();
+                resetTraineesAndTrainingCentres();
                 SpartaSimulatorLogger.InfoMessage("Getting number of years");
                 for (int j = 1; j <= CheckConfig.checkNumberOfYears(filename) * 12; j++) {
-
-                    TrainingCenterManager.removeLowAttendanceBootcamp();
-                    TrainingCenterManager.removeLowAttendanceTrainingHub();
-                    TrainingCenterManager.removeLowAttendanceTechcentre();
-
+                    checkForAndRemoveLowAttendanceCentres();
                     TraineeBench.gettingTraineesToBench();
-
                     if (j % 2 != 1) {
                         SpartaSimulatorLogger.InfoMessage("Generating training center");
                         generateTrainingCenter();
                     }
                     traineeAllocator();
-                    String[] records = CSVFormatter.getRecordsForMonth(i, j);
-                    recordPerMonthList.add(records);
+                    recordPerMonthList.add(CSVFormatter.getRecordsForMonth(i, j));
                 }
-                String[] records = CSVFormatter.getRecordsForYear(i);
-                recordPerYearList.add(records);
-
-
+                recordPerYearList.add(CSVFormatter.getRecordsForYear(i));
             }
             SpartaSimulatorLogger.InfoMessage("Creating CSV file");
 
@@ -77,7 +66,22 @@ public class MonthIterator {
         }
     }
 
-        private static void generateTrainingCenter () {
+    private static void checkForAndRemoveLowAttendanceCentres() {
+        TrainingCenterManager.removeLowAttendanceBootcamp();
+        TrainingCenterManager.removeLowAttendanceTrainingHub();
+        TrainingCenterManager.removeLowAttendanceTechcentre();
+    }
+
+    private static void resetTraineesAndTrainingCentres() {
+        TraineeManager.getTrainees().clear();
+        TrainingCenterManager.removeAllCentres();
+        TrainingCenterManager.resetClosedTrainingCentres();
+        TraineeManager.removeAllTraineesFromWaitingList();
+        TraineeManager.resetCurrentlyTrainingTrainees();
+        TraineeBench.resetBenchCount();
+    }
+
+    private static void generateTrainingCenter () {
             String typeOfTrainingCenter = RandomGenerator.getRandomTrainingCenter();
             int numberOfCentersGenerated = 0;
             if (typeOfTrainingCenter.equals("TrainingHub")) {
@@ -106,38 +110,10 @@ public class MonthIterator {
                     default:
                         break;
                 }
+            }
+        }
 
 
-//     private static void generateTrainingCenter() {
-//         String typeOfTrainingCenter = RandomGenerator.getRandomTrainingCenter();
-//         int numberOfCentersGenerated = 0;
-//         if(typeOfTrainingCenter.equals("TrainingHub")){
-//             numberOfCentersGenerated = 3;
-//         }else {
-//             numberOfCentersGenerated = 1;
-//         }
-//         for (int t = 0; t < numberOfCentersGenerated; t++) {
-//             switch (typeOfTrainingCenter){
-//                 case "TrainingHub":
-//                     TrainingHub trainingHub = new TrainingHub();
-//                     TrainingCenterManager.getTrainingHub().add(trainingHub);
-//                     break;
-//                 case "BootCamp":
-//                     if(TrainingCenterManager.getBootcampCenters().size() == BootcampCenter.getMaxBootcamp()){
-//                         generateTrainingCenter();
-//                     }else{
-//                         BootcampCenter bootcampCenter = new BootcampCenter();
-//                         TrainingCenterManager.getBootcampCenters().add(bootcampCenter);
-//                     }
-//                     break;
-//                 case "TechCenter":
-//                     TechCentre techCentre = new TechCentre();
-//                     TrainingCenterManager.getTechCenters().add(techCentre);
-//                     break;
-//                 default:
-//                     break;
-//             }
-//         }
 
 
         public static void traineeAllocator () {
@@ -170,8 +146,6 @@ public class MonthIterator {
             }
 
         }
-//        return numberOfTrainees;
-
 
         private static void addToWaitingList (List < Trainee > trainees) {
             while (trainees.size() != 0) {
@@ -180,11 +154,6 @@ public class MonthIterator {
             }
         }
 
-        private int getProperty (String property){
-            return Integer.parseInt(PropertiesLoader.getProperties(ConfigFilename.filename).getProperty(property));
-        }
-
     }
 
-}
 

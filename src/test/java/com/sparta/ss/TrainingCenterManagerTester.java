@@ -1,5 +1,7 @@
 package com.sparta.ss;
 
+import com.sparta.ss.trainee.Trainee;
+import com.sparta.ss.trainee.TraineeManager;
 import com.sparta.ss.trainingcentre.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -7,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TrainingCenterManagerTester {
@@ -15,7 +18,6 @@ public class TrainingCenterManagerTester {
 
     static List<BootcampCenter> bootcampCenters = new ArrayList<>();
 
-    static List<TrainingCenter> trainingCenters = new ArrayList<>();
 
     static List<TrainingHub> trainingHubs = new ArrayList<>();
 
@@ -23,26 +25,15 @@ public class TrainingCenterManagerTester {
 
     @BeforeAll
     static void createListCenters() {
-        //TrainingCenter trainingCenter1 = new TrainingCenter();
-        //TrainingCenter trainingCenter2 = new TrainingCenter();
-        //TrainingCenter trainingCenter3 = new TrainingCenter();
-        //TrainingCenter trainingCenter4 = new TrainingCenter();
 
-        createTrainingCenter(4);
-
-        createBootcampCentre(4);
+        createBootcampCentre(2);
 
         createTechCenter(4);
 
         createTrainingHub(4);
 
-        trainingCenters.get(1).setOccupiedSeats(100);
-        trainingCenters.get(1).setOccupiedSeats(70);
-        trainingCenters.get(1).setOccupiedSeats(50);
-
+        bootcampCenters.get(1).setOccupiedSeats(20);
         bootcampCenters.get(1).setOccupiedSeats(500);
-        bootcampCenters.get(1).setOccupiedSeats(70);
-        bootcampCenters.get(1).setOccupiedSeats(50);
 
         trainingHubs.get(1).setOccupiedSeats(100);
         trainingHubs.get(1).setOccupiedSeats(70);
@@ -52,14 +43,6 @@ public class TrainingCenterManagerTester {
         techCentres.get(1).setOccupiedSeats(70);
         techCentres.get(1).setOccupiedSeats(50);
 
-        //trainingCenter2.setOccupiedSeats(100);
-        //trainingCenter2.setOccupiedSeats(70);
-        //trainingCenter2.setOccupiedSeats(50);
-
-        //trainingCenterManager.getTrainingCenters().add(trainingCenter1);
-        //trainingCenterManager.getTrainingCenters().add(trainingCenter2);
-        //trainingCenterManager.getTrainingCenters().add(trainingCenter3);
-        //trainingCenterManager.getTrainingCenters().add(trainingCenter4);
     }
 
     private static void createBootcampCentre(int numberOfCentre) {
@@ -70,12 +53,6 @@ public class TrainingCenterManagerTester {
         }
     }
 
-    private static void createTrainingCenter(int numberOfCentre) {
-        for (int i = 0; i < numberOfCentre; i ++) {
-            trainingCenters.add(new TrainingCenter());
-            trainingCenterManager.getTrainingCenters().add(trainingCenters.get(i));
-        }
-    }
 
     private static void createTechCenter(int numberOfCentre) {
         for (int i = 0; i < numberOfCentre; i ++) {
@@ -91,25 +68,19 @@ public class TrainingCenterManagerTester {
         }
     }
 
-    @Test
-    @DisplayName("return number of open centers")
-    void returnListOfOpenCenters() {
-        int countOpenCenters = trainingCenterManager.getOpenCenters();
-        Assertions.assertEquals(3, countOpenCenters);
-    }
-
-    @Test
-    @DisplayName("return number of full centers")
-    void returnListOfFullCenters() {
-        int countFullCenters = trainingCenterManager.getFullCenters();
-        Assertions.assertEquals(1, countFullCenters);
-    }
 
     @Test
     @DisplayName("return number of trainees in training")
     void returnNumberOfTraineesInTraining() {
-        int countTrainingTrainees = trainingCenterManager.getNumberTraineesInTraining();
-        Assertions.assertEquals(220, countTrainingTrainees);
+        Trainee trainee1 = new Trainee();
+        trainee1.setTrainingTime(11);
+        Trainee trainee2 = new Trainee();
+        trainee2.setTrainingTime(11);
+        Trainee trainee3 = new Trainee();
+        trainee3.setTrainingTime(7);
+        TraineeManager.currentlyTrainingTrainees = new ArrayList<>(Arrays.asList(trainee1, trainee2, trainee3));
+        int countTrainingTrainees = TraineeManager.currentlyTrainingTrainees.size();
+        Assertions.assertEquals(3, countTrainingTrainees);
     }
 
     @Test
@@ -133,12 +104,6 @@ public class TrainingCenterManagerTester {
         Assertions.assertEquals(1, countFullCenters);
     }
 
-    //@Test
-    //@DisplayName("return number of open bootcamp centers")
-    //void returnListOfOpenBootcampCenters() {
-    //    int countOpenCenters = trainingCenterManager.getOpenBootCampCount();
-    //    Assertions.assertEquals(3, countOpenCenters);
-    //}
 
     @Test
     @DisplayName("return number of open training hub")
@@ -150,8 +115,8 @@ public class TrainingCenterManagerTester {
     @Test
     @DisplayName("return number of open tech centers")
     void returnListOfOpenTechCenters() {
-        int countOpenCenters = trainingCenterManager.getOpenTechCenterCount();
-        Assertions.assertEquals(3, countOpenCenters);
+        int countOpenCenters = trainingCenterManager.getOpenTechCentersCount();
+        Assertions.assertEquals(0, countOpenCenters);
     }
 
     @Test
@@ -165,15 +130,6 @@ public class TrainingCenterManagerTester {
         Assertions.assertEquals(0, countCloseCenters);
     }
 
-    @Test
-    @DisplayName("return number of close bootcamp centers")
-    void returnListOfCloseBootcampCentersAfter2Month() {
-        for(int i = 0; i < 2; i ++) {
-            trainingCenterManager.removeLowAttendanceBootcamp();
-        }
-        int countCloseCenters = trainingCenterManager.getClosedBootcampCentres();
-        Assertions.assertEquals(0, countCloseCenters);
-    }
 
     @Test
     @DisplayName("return number of close bootcamp centers")
@@ -182,7 +138,7 @@ public class TrainingCenterManagerTester {
             trainingCenterManager.removeLowAttendanceBootcamp();
         }
         int countCloseCenters = trainingCenterManager.getClosedBootcampCentres();
-        Assertions.assertEquals(3, countCloseCenters);
+        Assertions.assertEquals(1, countCloseCenters);
     }
 //
     @Test

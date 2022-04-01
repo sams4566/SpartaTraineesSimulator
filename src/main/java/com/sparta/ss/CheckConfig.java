@@ -1,13 +1,10 @@
 package com.sparta.ss;
 
-import com.sparta.ss.config.ConfigFilename;
 import com.sparta.ss.config.PropertiesLoader;
-import com.sparta.ss.exception.InvalidCenterNumberException;
 import com.sparta.ss.exception.InvalidChoiceOfOutput;
 import com.sparta.ss.exception.InvalidRunNumberException;
 import com.sparta.ss.exception.InvalidYearException;
 
-import java.util.Locale;
 
 public class CheckConfig {
     static  PropertiesLoader propertiesLoader = new PropertiesLoader();
@@ -23,19 +20,6 @@ public class CheckConfig {
                 throw new InvalidYearException();
         }
             return year;
-    }
-
-    public static int checkNumberOfCentersGenerated(String filename) throws InvalidCenterNumberException {
-        int numberOfCenters = 0;
-        try {
-            numberOfCenters = Integer.parseInt(propertiesLoader.getProperties(filename).getProperty("amountOfCentresGeneratedEveryOtherMonth"));
-            if (numberOfCenters <= 0) {
-                throw new InvalidCenterNumberException();
-            }
-        }catch (Exception e){
-            throw new InvalidCenterNumberException();
-        }
-        return numberOfCenters;
     }
 
 

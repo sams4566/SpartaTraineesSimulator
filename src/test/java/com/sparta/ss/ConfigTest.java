@@ -16,7 +16,7 @@ public class ConfigTest {
     @Test
     @DisplayName("Check number of years, runs and training centers")
     void checkNumberOfYears() {
-        Map<String, Integer> propertyMapper = Map.of("amountOfYears",1,"amountOfCentresGeneratedEveryOtherMonth",1,"amountOfTimesToRun",1);
+        Map<String, Integer> propertyMapper = Map.of("amountOfYears",1,"amountOfTimesToRun",1);
         for(Map.Entry<String, Integer> entry : propertyMapper.entrySet()){
             assertEquals(entry.getValue(), Integer.parseInt(PropertiesLoader.getProperties(ConfigFilename.testFilename).getProperty(entry.getKey())));
         }
